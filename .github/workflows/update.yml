@@ -23,6 +23,10 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install dependencies
+        run: |
+          pip install lunardate
+
       - name: Generate calendar
         run: |
           python generate_calendar.py
