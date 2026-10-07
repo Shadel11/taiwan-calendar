@@ -24,8 +24,8 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-  run: |
-    pip install lunardate requests
+        run: |
+          pip install lunardate requests
 
       - name: Generate calendar
         run: |
