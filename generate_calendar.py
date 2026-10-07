@@ -44,9 +44,6 @@ OUTPUT_FILE = "taiwan.ics"
 # HTTPS
 # ============================================================
 
-# DGPA 目前的 HTTPS 憑證在 GitHub Actions 環境可能出現
-# Subject Key Identifier 驗證問題。
-# 因此暫時關閉 urllib3 的警告，HTTP 請求使用 verify=False。
 urllib3.disable_warnings(
     urllib3.exceptions.InsecureRequestWarning
 )
@@ -84,11 +81,9 @@ def parse_date(value):
     if not text:
         return None
 
-    # --------------------------------------------------------
     # 2026/02/17
     # 2026-02-17
     # 2026.02.17
-    # --------------------------------------------------------
 
     m = re.search(
         r"(\d{4})[./-](\d{1,2})[./-](\d{1,2})",
@@ -105,9 +100,7 @@ def parse_date(value):
         except ValueError:
             return None
 
-    # --------------------------------------------------------
     # 20260217
-    # --------------------------------------------------------
 
     m = re.search(
         r"(\d{4})(\d{2})(\d{2})",
@@ -124,9 +117,7 @@ def parse_date(value):
         except ValueError:
             return None
 
-    # --------------------------------------------------------
     # Excel serial date
-    # --------------------------------------------------------
 
     if text.isdigit():
         try:
@@ -155,9 +146,7 @@ def get_resource_links():
 
     links = []
 
-    # --------------------------------------------------------
     # href="..."
-    # --------------------------------------------------------
 
     for match in re.finditer(
         r'href=["\']([^"\']+)["\']',
@@ -182,9 +171,7 @@ def get_resource_links():
         if full_url not in links:
             links.append(full_url)
 
-    # --------------------------------------------------------
     # 頁面文字中的完整 CSV URL
-    # --------------------------------------------------------
 
     for match in re.finditer(
         r'https?://[^"\'>\s]+\.csv[^"\'>\s]*',
@@ -235,14 +222,9 @@ def find_csv_url(year):
 
     for url in links:
         decoded = unquote(url)
-
         decoded_lower = decoded.lower()
 
         score = 0
-
-        # ----------------------------------------------------
-        # 精準年度
-        # ----------------------------------------------------
 
         if f"{roc_year}年" in decoded:
             score += 1000
@@ -253,27 +235,14 @@ def find_csv_url(year):
         ):
             score += 1000
 
-        # ----------------------------------------------------
-        # 辦公日曆
-        # ----------------------------------------------------
-
         if "辦公日曆表" in decoded:
             score += 100
 
         if "辦公日曆" in decoded:
             score += 50
 
-        # ----------------------------------------------------
-        # Google 行事曆專用
-        # 普通 CSV 優先
-        # ----------------------------------------------------
-
         if "Google行事曆專用" in decoded:
             score -= 10
-
-        # ----------------------------------------------------
-        # 如果 URL 有西元年份也加分
-        # ----------------------------------------------------
 
         if str(year) in decoded:
             score += 30
@@ -297,10 +266,6 @@ def find_csv_url(year):
             f"[資料] 候選 {score}："
             f"{decoded}"
         )
-
-    # --------------------------------------------------------
-    # 第一優先：精準民國年度
-    # --------------------------------------------------------
 
     exact_candidates = [
         item
@@ -409,6 +374,7 @@ def read_dgpa_csv(year):
         normalized = {}
 
         for key, value in raw.items():
+
             if key is None:
                 continue
 
@@ -424,10 +390,6 @@ def read_dgpa_csv(year):
                 else str(value).strip()
             )
 
-        # ----------------------------------------------------
-        # 日期
-        # ----------------------------------------------------
-
         date_value = None
 
         for key in [
@@ -435,7 +397,9 @@ def read_dgpa_csv(year):
             "日期",
             "Date",
         ]:
+
             if key in normalized:
+
                 date_value = parse_date(
                     normalized[key]
                 )
@@ -446,10 +410,6 @@ def read_dgpa_csv(year):
         if not date_value:
             continue
 
-        # ----------------------------------------------------
-        # 是否放假
-        # ----------------------------------------------------
-
         holiday_value = ""
 
         for key in [
@@ -457,13 +417,12 @@ def read_dgpa_csv(year):
             "放假",
             "Holiday",
         ]:
-            if key in normalized:
-                holiday_value = normalized[key]
-                break
 
-        # ----------------------------------------------------
-        # 備註
-        # ----------------------------------------------------
+            if key in normalized:
+
+                holiday_value = normalized[key]
+
+                break
 
         note_value = ""
 
@@ -473,8 +432,11 @@ def read_dgpa_csv(year):
             "說明",
             "Note",
         ]:
+
             if key in normalized:
+
                 note_value = normalized[key]
+
                 break
 
         rows.append({
@@ -532,6 +494,125 @@ def is_workday_value(value):
 
 
 # ============================================================
+# 從文字直接判斷節日名稱
+#
+# ★ 這是這次修正的核心
+#
+# 不再只靠「附近日期猜節日」。
+# 例如：
+#
+# 兒童節逢例假日，於清明節之次日補假
+#
+# 必須判定為：
+#
+# 兒童節
+#
+# 而不是清明節。
+# ============================================================
+
+def detect_holiday_name_from_text(text):
+    if not text:
+        return ""
+
+    text = str(text).strip()
+
+    # --------------------------------------------------------
+    # 優先順序非常重要
+    # --------------------------------------------------------
+
+    keywords = [
+        (
+            "臺灣光復暨金門古寧頭大捷紀念日",
+            "臺灣光復暨金門古寧頭大捷紀念日",
+        ),
+        (
+            "台灣光復暨金門古寧頭大捷紀念日",
+            "臺灣光復暨金門古寧頭大捷紀念日",
+        ),
+        (
+            "孔子誕辰紀念日",
+            "孔子誕辰紀念日／教師節",
+        ),
+        (
+            "教師節",
+            "孔子誕辰紀念日／教師節",
+        ),
+        (
+            "行憲紀念日",
+            "行憲紀念日",
+        ),
+        (
+            "勞動節",
+            "勞動節",
+        ),
+        (
+            "兒童節",
+            "兒童節",
+        ),
+        (
+            "清明節",
+            "清明節",
+        ),
+        (
+            "民族掃墓節",
+            "清明節",
+        ),
+        (
+            "端午節",
+            "端午節",
+        ),
+        (
+            "中秋節",
+            "中秋節",
+        ),
+        (
+            "國慶日",
+            "國慶日",
+        ),
+        (
+            "和平紀念日",
+            "228和平紀念日",
+        ),
+        (
+            "228和平紀念日",
+            "228和平紀念日",
+        ),
+        (
+            "元旦",
+            "元旦",
+        ),
+        (
+            "開國紀念日",
+            "元旦",
+        ),
+        (
+            "中華民國開國紀念日",
+            "元旦",
+        ),
+        (
+            "除夕",
+            "除夕",
+        ),
+        (
+            "春節",
+            "春節",
+        ),
+        (
+            "農曆春節",
+            "春節",
+        ),
+    ]
+
+    for keyword, name in keywords:
+
+        if keyword in text:
+
+            return name
+
+    return ""
+
+
+# ============================================================
 # 清理官方假日名稱
 # ============================================================
 
@@ -548,7 +629,18 @@ def normalize_holiday_name(note):
     )
 
     # --------------------------------------------------------
-    # 補假／補班文字另外處理
+    # 先從完整備註判斷節日
+    # --------------------------------------------------------
+
+    detected = detect_holiday_name_from_text(
+        text
+    )
+
+    if detected:
+        return detected
+
+    # --------------------------------------------------------
+    # 再清除補假／補班文字
     # --------------------------------------------------------
 
     text = text.replace(
@@ -591,92 +683,12 @@ def normalize_holiday_name(note):
         "",
     )
 
-    # --------------------------------------------------------
-    # 官方名稱統一
-    # --------------------------------------------------------
+    detected = detect_holiday_name_from_text(
+        text
+    )
 
-    replacements = [
-        (
-            "中華民國開國紀念日",
-            "元旦",
-        ),
-        (
-            "開國紀念日",
-            "元旦",
-        ),
-        (
-            "和平紀念日",
-            "228和平紀念日",
-        ),
-        (
-            "民族掃墓節",
-            "清明節",
-        ),
-        (
-            "兒童節",
-            "兒童節",
-        ),
-        (
-            "清明節",
-            "清明節",
-        ),
-        (
-            "端午節",
-            "端午節",
-        ),
-        (
-            "中秋節",
-            "中秋節",
-        ),
-        (
-            "國慶日",
-            "國慶日",
-        ),
-        (
-            "臺灣光復暨金門古寧頭大捷紀念日",
-            "臺灣光復暨金門古寧頭大捷紀念日",
-        ),
-        (
-            "台灣光復暨金門古寧頭大捷紀念日",
-            "臺灣光復暨金門古寧頭大捷紀念日",
-        ),
-        (
-            "孔子誕辰紀念日",
-            "孔子誕辰紀念日／教師節",
-        ),
-        (
-            "教師節",
-            "孔子誕辰紀念日／教師節",
-        ),
-        (
-            "行憲紀念日",
-            "行憲紀念日",
-        ),
-        (
-            "勞動節",
-            "勞動節",
-        ),
-        (
-            "春節",
-            "春節",
-        ),
-        (
-            "農曆春節",
-            "春節",
-        ),
-        (
-            "除夕",
-            "除夕",
-        ),
-    ]
-
-    for old, new in replacements:
-        if old in text:
-            return new
-
-    # --------------------------------------------------------
-    # 清除無意義字樣
-    # --------------------------------------------------------
+    if detected:
+        return detected
 
     text = text.replace(
         "放假",
@@ -729,7 +741,9 @@ LUNAR_DAY_NAMES = {
 
 
 def lunar_day_label(solar_date):
+
     try:
+
         lunar = LunarDate.fromSolarDate(
             solar_date.year,
             solar_date.month,
@@ -739,10 +753,12 @@ def lunar_day_label(solar_date):
         return lunar.month, lunar.day
 
     except Exception:
+
         return None, None
 
 
 def lunar_special_name(solar_date):
+
     lunar_month, lunar_day = lunar_day_label(
         solar_date
     )
@@ -750,12 +766,13 @@ def lunar_special_name(solar_date):
     if lunar_month is None:
         return ""
 
-    # --------------------------------------------------------
     # 農曆十二月最後一天 = 除夕
-    # --------------------------------------------------------
 
     if lunar_month == 12:
-        next_day = solar_date + timedelta(days=1)
+
+        next_day = solar_date + timedelta(
+            days=1
+        )
 
         next_month, _ = lunar_day_label(
             next_day
@@ -764,11 +781,10 @@ def lunar_special_name(solar_date):
         if next_month == 1:
             return "除夕"
 
-    # --------------------------------------------------------
     # 農曆正月
-    # --------------------------------------------------------
 
     if lunar_month == 1:
+
         return LUNAR_DAY_NAMES.get(
             lunar_day,
             "",
@@ -782,24 +798,31 @@ def lunar_special_name(solar_date):
 # ============================================================
 
 def is_lunar_new_year_period(solar_date):
+
     lunar_month, lunar_day = lunar_day_label(
         solar_date
     )
 
     # 初一～十五
+
     if (
         lunar_month == 1
         and lunar_day is not None
         and 1 <= lunar_day <= 15
     ):
+
         return True
 
     # 除夕
+
     if lunar_special_name(solar_date) == "除夕":
         return True
 
-    # 小年夜：除夕前一天
-    next_day = solar_date + timedelta(days=1)
+    # 小年夜
+
+    next_day = solar_date + timedelta(
+        days=1
+    )
 
     if lunar_special_name(next_day) == "除夕":
         return True
@@ -809,15 +832,21 @@ def is_lunar_new_year_period(solar_date):
 
 # ============================================================
 # 找附近官方假日名稱
+#
+# ★ 只作最後備援
+#
+# 補假日期不再優先使用這個函式。
 # ============================================================
 
 def find_nearby_holiday_name(
     rows,
     target_date,
 ):
+
     candidates = []
 
     for row in rows:
+
         d = row["date"]
 
         if d == target_date:
@@ -840,8 +869,11 @@ def find_nearby_holiday_name(
             continue
 
         if name == "春節":
+
             score = 100 - distance
+
         else:
+
             score = 50 - distance
 
         candidates.append(
@@ -863,6 +895,122 @@ def find_nearby_holiday_name(
 
 
 # ============================================================
+# ★ 判斷補假真正對應的節日
+# ============================================================
+
+def find_makeup_holiday_name(
+    rows,
+    target_date,
+    note,
+):
+
+    # --------------------------------------------------------
+    # 第一優先：
+    # 直接從當天官方備註判斷
+    # --------------------------------------------------------
+
+    name = detect_holiday_name_from_text(
+        note
+    )
+
+    if name:
+        return name
+
+    # --------------------------------------------------------
+    # 第二優先：
+    # 往前找 3 天內的官方節日
+    # --------------------------------------------------------
+
+    previous_candidates = []
+
+    for row in rows:
+
+        d = row["date"]
+
+        if d >= target_date:
+            continue
+
+        distance = (
+            target_date - d
+        ).days
+
+        if distance > 3:
+            continue
+
+        name = detect_holiday_name_from_text(
+            row["note"]
+        )
+
+        if not name:
+            continue
+
+        previous_candidates.append(
+            (
+                distance,
+                name,
+            )
+        )
+
+    previous_candidates.sort(
+        key=lambda x: x[0]
+    )
+
+    if previous_candidates:
+        return previous_candidates[0][1]
+
+    # --------------------------------------------------------
+    # 第三優先：
+    # 往後找 3 天
+    # --------------------------------------------------------
+
+    next_candidates = []
+
+    for row in rows:
+
+        d = row["date"]
+
+        if d <= target_date:
+            continue
+
+        distance = (
+            d - target_date
+        ).days
+
+        if distance > 3:
+            continue
+
+        name = detect_holiday_name_from_text(
+            row["note"]
+        )
+
+        if not name:
+            continue
+
+        next_candidates.append(
+            (
+                distance,
+                name,
+            )
+        )
+
+    next_candidates.sort(
+        key=lambda x: x[0]
+    )
+
+    if next_candidates:
+        return next_candidates[0][1]
+
+    # --------------------------------------------------------
+    # 最後才使用舊的附近搜尋
+    # --------------------------------------------------------
+
+    return find_nearby_holiday_name(
+        rows,
+        target_date,
+    )
+
+
+# ============================================================
 # 建立政府假日事件
 # ============================================================
 
@@ -870,6 +1018,7 @@ def build_government_events(
     year,
     rows,
 ):
+
     events = []
 
     # --------------------------------------------------------
@@ -878,6 +1027,7 @@ def build_government_events(
     # --------------------------------------------------------
 
     for row in rows:
+
         d = row["date"]
 
         if d.year != year:
@@ -905,6 +1055,7 @@ def build_government_events(
         )
 
         # 普通週末沒有特殊備註時，不建立事件
+
         if not (
             is_weekday
             or has_note
@@ -912,9 +1063,24 @@ def build_government_events(
         ):
             continue
 
-        name = normalize_holiday_name(
+        # ----------------------------------------------------
+        # 先直接從官方備註抓節日名稱
+        # ----------------------------------------------------
+
+        name = detect_holiday_name_from_text(
             note
         )
+
+        # ----------------------------------------------------
+        # 如果官方備註沒有明確名稱
+        # 才使用原本清理方法
+        # ----------------------------------------------------
+
+        if not name:
+
+            name = normalize_holiday_name(
+                note
+            )
 
         # ----------------------------------------------------
         # 春節特殊處理
@@ -926,30 +1092,19 @@ def build_government_events(
                 d
             )
 
-            # ------------------------------------------------
             # 除夕
-            # ------------------------------------------------
 
             if lunar_name == "除夕":
+
                 name = "除夕"
 
-            # ------------------------------------------------
             # 初一～十五
-            # ------------------------------------------------
 
             elif lunar_name:
+
                 name = lunar_name
 
-            # ------------------------------------------------
             # 小年夜
-            #
-            # 原本程式的 Bug：
-            # if lunar_name:
-            #     if lunar_name == "":
-            # 永遠不會成立。
-            #
-            # 這裡直接判斷「隔天是不是除夕」。
-            # ------------------------------------------------
 
             elif (
                 lunar_special_name(
@@ -957,9 +1112,11 @@ def build_government_events(
                 )
                 == "除夕"
             ):
+
                 name = "小年夜"
 
             elif not name:
+
                 name = "春節"
 
         # ----------------------------------------------------
@@ -967,6 +1124,7 @@ def build_government_events(
         # ----------------------------------------------------
 
         if not name:
+
             nearby = find_nearby_holiday_name(
                 rows,
                 d,
@@ -976,10 +1134,15 @@ def build_government_events(
                 name = nearby
 
         if not name:
+
             name = "政府放假日"
 
         # ----------------------------------------------------
         # 補假
+        #
+        # ★ 這裡改成：
+        # 先從「當天備註」判斷真正節日。
+        # 不再讓附近的清明節／行憲紀念日搶走名稱。
         # ----------------------------------------------------
 
         note_text = str(note)
@@ -991,7 +1154,19 @@ def build_government_events(
         )
 
         if is_makeup_holiday:
+
+            makeup_name = find_makeup_holiday_name(
+                rows,
+                d,
+                note_text,
+            )
+
+            if makeup_name:
+
+                name = makeup_name
+
             if not name.endswith("(補假)"):
+
                 name = f"{name}(補假)"
 
         events.append({
@@ -1006,6 +1181,7 @@ def build_government_events(
     # --------------------------------------------------------
 
     for row in rows:
+
         d = row["date"]
 
         if d.year != year:
@@ -1032,17 +1208,25 @@ def build_government_events(
         ):
             continue
 
-        holiday_name = normalize_holiday_name(
+        holiday_name = detect_holiday_name_from_text(
             note
         )
 
         if not holiday_name:
+
+            holiday_name = normalize_holiday_name(
+                note
+            )
+
+        if not holiday_name:
+
             holiday_name = find_nearby_holiday_name(
                 rows,
                 d,
             )
 
         if not holiday_name:
+
             holiday_name = "政府假日"
 
         events.append({
@@ -1058,6 +1242,7 @@ def build_government_events(
     unique = {}
 
     for event in events:
+
         key = (
             event["date"],
             event["summary"],
@@ -1084,7 +1269,6 @@ def build_government_events(
 # ============================================================
 
 def get_mothers_day(year):
-    # 5 月第二個星期日
 
     d = date(
         year,
@@ -1093,13 +1277,17 @@ def get_mothers_day(year):
     )
 
     while d.weekday() != 6:
-        d += timedelta(days=1)
 
-    return d + timedelta(days=7)
+        d += timedelta(
+            days=1
+        )
+
+    return d + timedelta(
+        days=7
+    )
 
 
 def get_fathers_day(year):
-    # 台灣常用父親節：8/8
 
     return date(
         year,
@@ -1109,6 +1297,7 @@ def get_fathers_day(year):
 
 
 def build_family_events(year):
+
     return [
         {
             "date": get_mothers_day(year),
@@ -1124,10 +1313,11 @@ def build_family_events(year):
 
 
 # ============================================================
-# 高雄停班停課
+# 高雄停班停課日期解析
 # ============================================================
 
 def parse_khh_date(value):
+
     if value is None:
         return None
 
@@ -1142,11 +1332,7 @@ def parse_khh_date(value):
     if not text:
         return None
 
-    # --------------------------------------------------------
     # 西元
-    # 2026-10-07
-    # 2026/10/07
-    # --------------------------------------------------------
 
     m = re.search(
         r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})",
@@ -1154,19 +1340,20 @@ def parse_khh_date(value):
     )
 
     if m:
+
         try:
+
             return date(
                 int(m.group(1)),
                 int(m.group(2)),
                 int(m.group(3)),
             )
+
         except ValueError:
+
             pass
 
-    # --------------------------------------------------------
     # 民國
-    # 115/10/7
-    # --------------------------------------------------------
 
     m = re.search(
         r"(\d{3})[-/.](\d{1,2})[-/.](\d{1,2})",
@@ -1174,19 +1361,20 @@ def parse_khh_date(value):
     )
 
     if m:
+
         try:
+
             return date(
                 int(m.group(1)) + 1911,
                 int(m.group(2)),
                 int(m.group(3)),
             )
+
         except ValueError:
+
             pass
 
-    # --------------------------------------------------------
     # 純數字
-    # 20261007
-    # --------------------------------------------------------
 
     m = re.search(
         r"(?<!\d)(\d{8})(?!\d)",
@@ -1194,15 +1382,19 @@ def parse_khh_date(value):
     )
 
     if m:
+
         raw = m.group(1)
 
         try:
+
             return date(
                 int(raw[0:4]),
                 int(raw[4:6]),
                 int(raw[6:8]),
             )
+
         except ValueError:
+
             pass
 
     return None
@@ -1213,13 +1405,17 @@ def parse_khh_date(value):
 # ============================================================
 
 def recursive_find_khh_records(obj):
+
     records = []
 
     if isinstance(obj, list):
 
         for item in obj:
+
             records.extend(
-                recursive_find_khh_records(item)
+                recursive_find_khh_records(
+                    item
+                )
             )
 
     elif isinstance(obj, dict):
@@ -1239,6 +1435,7 @@ def recursive_find_khh_records(obj):
         )
 
         if date_like:
+
             records.append(obj)
 
         for value in obj.values():
@@ -1247,6 +1444,7 @@ def recursive_find_khh_records(obj):
                 value,
                 (dict, list),
             ):
+
                 records.extend(
                     recursive_find_khh_records(
                         value
@@ -1261,9 +1459,6 @@ def recursive_find_khh_records(obj):
 # ============================================================
 
 def find_date_in_khh_record(record):
-    # --------------------------------------------------------
-    # 優先從欄位名稱判斷
-    # --------------------------------------------------------
 
     preferred_keys = [
         "日期",
@@ -1288,10 +1483,6 @@ def find_date_in_khh_record(record):
                 if parsed:
                     return parsed
 
-    # --------------------------------------------------------
-    # 再從所有欄位搜尋日期
-    # --------------------------------------------------------
-
     for key, value in record.items():
 
         key_text = str(key)
@@ -1312,20 +1503,14 @@ def find_date_in_khh_record(record):
             if parsed:
                 return parsed
 
-    # --------------------------------------------------------
-    # 最後從整筆資料文字找日期
-    # --------------------------------------------------------
-
     record_text = " ".join(
         str(v)
         for v in record.values()
     )
 
-    parsed = parse_khh_date(
+    return parse_khh_date(
         record_text
     )
-
-    return parsed
 
 
 # ============================================================
@@ -1333,12 +1518,14 @@ def find_date_in_khh_record(record):
 # ============================================================
 
 def build_khh_events():
+
     print()
     print("=" * 60)
     print("[高雄] 正在取得高雄市停班停課資料")
     print("=" * 60)
 
     try:
+
         response = http_get(
             KHH_API_URL,
             timeout=30,
@@ -1353,7 +1540,6 @@ def build_khh_events():
             f"{exc}"
         )
 
-        # API 失敗不能影響政府假日 ICS
         return []
 
     records = recursive_find_khh_records(
@@ -1380,9 +1566,7 @@ def build_khh_events():
             for v in record.values()
         )
 
-        # ----------------------------------------------------
         # 只收高雄
-        # ----------------------------------------------------
 
         if not any(
             keyword in record_text
@@ -1393,9 +1577,7 @@ def build_khh_events():
         ):
             continue
 
-        # ----------------------------------------------------
         # 只收停班停課
-        # ----------------------------------------------------
 
         if not any(
             keyword in record_text
@@ -1421,9 +1603,7 @@ def build_khh_events():
             "source": "kaohsiung",
         })
 
-    # --------------------------------------------------------
     # 去重
-    # --------------------------------------------------------
 
     unique = {}
 
@@ -1457,6 +1637,7 @@ def build_khh_events():
 # ============================================================
 
 def ics_escape(text):
+
     text = str(text)
 
     text = text.replace(
@@ -1492,11 +1673,6 @@ def ics_escape(text):
 # ============================================================
 
 def fold_ics_line(line):
-    """
-    RFC 5545：
-    每行最多 75 octets。
-    使用 UTF-8 bytes 切割，避免中文被切斷。
-    """
 
     encoded = line.encode(
         "utf-8"
@@ -1520,6 +1696,7 @@ def fold_ics_line(line):
             + len(char_bytes)
             > 75
         ):
+
             result.append(
                 current.decode(
                     "utf-8"
@@ -1533,6 +1710,7 @@ def fold_ics_line(line):
         )
 
     if current:
+
         result.append(
             current.decode(
                 "utf-8"
@@ -1556,6 +1734,7 @@ def make_uid(
     event_date,
     summary,
 ):
+
     key = (
         f"{event_date.isoformat()}"
         f"|{summary}"
@@ -1577,10 +1756,6 @@ def make_uid(
 # ============================================================
 
 def write_ics(events):
-
-    # --------------------------------------------------------
-    # DTSTAMP 使用 UTC
-    # --------------------------------------------------------
 
     now = datetime.now(
         timezone.utc
@@ -1642,20 +1817,13 @@ def write_ics(events):
         "END:VCALENDAR"
     )
 
-    # --------------------------------------------------------
-    # RFC 5545 折行
-    # --------------------------------------------------------
-
     folded_lines = []
 
     for line in lines:
+
         folded_lines.extend(
             fold_ics_line(line)
         )
-
-    # --------------------------------------------------------
-    # 寫檔
-    # --------------------------------------------------------
 
     with open(
         OUTPUT_FILE,
@@ -1690,10 +1858,12 @@ def main():
     print("=" * 70)
     print("台灣生活行事曆：開始更新")
     print("=" * 70)
+
     print(
         f"[設定] 目前年份："
         f"{CURRENT_YEAR}"
     )
+
     print(
         f"[設定] 更新年份："
         f"{YEARS}"
@@ -1809,10 +1979,12 @@ def main():
         f"[完成] ✓ 已產生："
         f"{OUTPUT_FILE}"
     )
+
     print(
         f"[完成] ✓ 總事件數："
         f"{len(all_events)}"
     )
+
     print("=" * 70)
 
 
