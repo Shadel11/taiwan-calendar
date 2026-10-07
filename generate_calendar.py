@@ -67,7 +67,7 @@ MAKEUP_HOLIDAY_MAP = {
 }
 
 # ============================================================
-# 官方核定節日標準備援清單 (Fallback)
+# 官方核定節日標準清單 (Fallback)
 # ============================================================
 
 OFFICIAL_HOLIDAYS_FALLBACK = {
@@ -222,7 +222,6 @@ def fetch_dgpa_events_for_year(year):
         raw_note = str(r.get(note_col, "")).strip().replace("放假", "").strip() if note_col else ""
         d_str = d.isoformat()
 
-        # 優先比對補假表
         if d_str in makeup_map:
             name = makeup_map[d_str]
         elif raw_note and raw_note != "補假":
@@ -243,14 +242,10 @@ def fetch_dgpa_events_for_year(year):
 def build_government_events():
     events = []
     for year in TARGET_YEARS:
-        print(f"📅 處理 {year} 年政府辦公日曆...")
         parsed = fetch_dgpa_events_for_year(year)
-
         if parsed:
-            print(f"✅ 從官方 CSV 成功取得 {year} 年日曆 ({len(parsed)} 筆)")
             events.extend(parsed)
         else:
-            print(f"ℹ️ 使用 {year} 年官方核定假日標準清單 (Fallback)")
             fallback = OFFICIAL_HOLIDAYS_FALLBACK.get(year, {})
             for d, name in fallback.items():
                 events.append({
@@ -376,7 +371,7 @@ def build_ics(events):
 def main():
     all_events = build_government_events() + build_family_events() + get_kaohsiung_events()
 
-    # 去重
+    # 以 (日期, 摘要名稱) 嚴格去重
     unique_events = []
     seen = set()
     for e in all_events:
@@ -387,10 +382,11 @@ def main():
 
     unique_events.sort(key=lambda item: (item["date"], item["summary"]))
 
+    # 確保以純覆寫寫入檔案
     with open(OUTPUT_FILE, "w", encoding="utf-8", newline="") as f:
         f.write(build_ics(unique_events))
 
-    print(f"✅ 成功產生日曆：共 {len(unique_events)} 筆事件")
+    print(f"✅ 成功產生日曆：共 {len(unique_events)} 筆事件，無重複容器。")
 
 
 if __name__ == "__main__":
