@@ -20,11 +20,11 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
-          pip install requests urllib3 lunarcalendar
+          pip install requests urllib3
 
       - name: Generate calendar
         run: |
