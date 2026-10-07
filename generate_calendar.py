@@ -115,21 +115,121 @@ def normalize_text(value):
 
 def parse_date(value):
     """
-    支援：
+    支援政府 CSV 常見日期格式：
+
     20260101
     2026/01/01
+    2026/1/1
     2026-01-01
+    2026-1-1
+    1150101
+    115/01/01
+    115/1/1
     """
+
     text = normalize_text(value)
 
-    digits = re.sub(r"[^0-9]", "", text)
+    if not text:
+        return None
+
+    # -------------------------------------------------
+    # 1. 先處理 YYYY/MM/DD、YYYY-MM-DD
+    # -------------------------------------------------
+
+    match = re.search(
+        r"(\d{4})\s*[/-]\s*(\d{1,2})\s*[/-]\s*(\d{1,2})",
+        text,
+    )
+
+    if match:
+
+        try:
+
+            year = int(match.group(1))
+            month = int(match.group(2))
+            day = int(match.group(3))
+
+            return date(
+                year,
+                month,
+                day,
+            )
+
+        except ValueError:
+            pass
+
+    # -------------------------------------------------
+    # 2. 純數字 YYYYMMDD
+    # -------------------------------------------------
+
+    digits = re.sub(
+        r"[^0-9]",
+        "",
+        text,
+    )
 
     if len(digits) == 8:
+
         try:
+
             return datetime.strptime(
                 digits,
                 "%Y%m%d",
             ).date()
+
+        except ValueError:
+            pass
+
+    # -------------------------------------------------
+    # 3. 民國年格式：
+    #    1150101
+    #    115/01/01
+    #    115/1/1
+    # -------------------------------------------------
+
+    match = re.search(
+        r"(?<!\d)(\d{3})\s*[/-]?\s*(\d{1,2})\s*[/-]?\s*(\d{1,2})(?!\d)",
+        text,
+    )
+
+    if match:
+
+        try:
+
+            roc_year = int(match.group(1))
+            month = int(match.group(2))
+            day = int(match.group(3))
+
+            year = roc_year + 1911
+
+            return date(
+                year,
+                month,
+                day,
+            )
+
+        except ValueError:
+            pass
+
+    # -------------------------------------------------
+    # 4. 純 7 位數民國日期
+    #    1150101
+    # -------------------------------------------------
+
+    if len(digits) == 7:
+
+        try:
+
+            roc_year = int(digits[:3])
+            month = int(digits[3:5])
+            day = int(digits[5:7])
+
+            return date(
+                roc_year + 1911,
+                month,
+                day,
+            )
+
         except ValueError:
             pass
 
