@@ -34,6 +34,12 @@ from urllib.parse import urljoin
 import requests
 from lunardate import LunarDate
 
+import urllib3
+
+urllib3.disable_warnings(
+    urllib3.exceptions.InsecureRequestWarning
+)
+
 
 # ============================================================
 # 基本設定
@@ -84,6 +90,7 @@ def http_get(url, timeout=30):
         url,
         headers=HEADERS,
         timeout=timeout,
+        verify=False,
     )
 
     response.raise_for_status()
