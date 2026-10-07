@@ -2,6 +2,8 @@ import csv
 import io
 import json
 import re
+import ssl
+import time
 import urllib.parse
 import urllib.request
 from datetime import date, timedelta
@@ -18,23 +20,113 @@ KAOHSIUNG_API = (
 
 
 # =========================================================
-# 基本網路工具
+# SSL / 網路設定
 # =========================================================
 
-def fetch_text(url, timeout=60):
-    req = urllib.request.Request(
+def build_ssl_context():
+    """
+    政府網站目前的部分憑證鏈會讓 GitHub Actions
+    Ubuntu / Python OpenSSL 出現：
+
+    CERTIFICATE_VERIFY_FAILED
+    Missing Subject Key Identifier
+
+    這裡只關閉 X509 strict 檢查，
+    仍然保留正常 HTTPS 憑證驗證與主機名稱驗證。
+    """
+
+    context = ssl.create_default_context()
+
+    if hasattr(ssl, "VERIFY_X509_STRICT"):
+        context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+
+    return context
+
+
+SSL_CONTEXT = build_ssl_context()
+
+
+def fetch_bytes(url, timeout=90, retries=3):
+    """
+    網路下載工具：
+
+    1. HTTPS
+    2. SSL context
+    3. 自動重試
+    4. 政府網站較慢時給較長 timeout
+    """
+
+    last_error = None
+
+    for attempt in range(1, retries + 1):
+
+        try:
+
+            request = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": (
+                        "Mozilla/5.0 "
+                        "(Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 "
+                        "Chrome/154.0 Safari/537.36 "
+                        "Taiwan-Life-Calendar"
+                    ),
+                    "Accept": (
+                        "text/csv,"
+                        "application/json,"
+                        "text/plain,"
+                        "*/*"
+                    ),
+                    "Connection": "close",
+                }
+            )
+
+            with urllib.request.urlopen(
+                request,
+                timeout=timeout,
+                context=SSL_CONTEXT
+            ) as response:
+
+                return response.read()
+
+        except Exception as error:
+
+            last_error = error
+
+            print(
+                f"[網路重試] 第 {attempt}/{retries} 次失敗："
+                f"{error}"
+            )
+
+            if attempt < retries:
+                time.sleep(3)
+
+    raise last_error
+
+
+def fetch_text(url, timeout=90, retries=3):
+
+    raw = fetch_bytes(
         url,
-        headers={
-            "User-Agent": "Mozilla/5.0 Taiwan-Life-Calendar-GitHub"
-        }
+        timeout=timeout,
+        retries=retries
     )
 
-    with urllib.request.urlopen(req, timeout=timeout) as response:
-        return response.read().decode("utf-8-sig", errors="replace")
+    return raw.decode(
+        "utf-8-sig",
+        errors="replace"
+    )
 
 
-def fetch_json(url, timeout=90):
-    text = fetch_text(url, timeout)
+def fetch_json(url, timeout=90, retries=3):
+
+    text = fetch_text(
+        url,
+        timeout=timeout,
+        retries=retries
+    )
+
     return json.loads(text)
 
 
@@ -43,56 +135,92 @@ def fetch_json(url, timeout=90):
 # =========================================================
 
 def normalize_date(value):
+
     value = str(value).strip()
 
+    # YYYYMMDD
+    match = re.match(
+        r"^(\d{4})(\d{2})(\d{2})$",
+        value
+    )
+
+    if match:
+
+        try:
+
+            return date(
+                int(match.group(1)),
+                int(match.group(2)),
+                int(match.group(3))
+            ).isoformat()
+
+        except ValueError:
+
+            return None
+
     # YYYY/MM/DD
+    # YYYY-MM-DD
     match = re.match(
         r"^(\d{4})[/-](\d{1,2})[/-](\d{1,2})",
         value
     )
 
     if match:
-        year = int(match.group(1))
-        month = int(match.group(2))
-        day = int(match.group(3))
 
         try:
-            return date(year, month, day).isoformat()
+
+            return date(
+                int(match.group(1)),
+                int(match.group(2)),
+                int(match.group(3))
+            ).isoformat()
+
         except ValueError:
+
             return None
 
     return None
 
 
 # =========================================================
-# 抓取行政院人事行政總處辦公日曆 CSV
+# 官方行政機關辦公日曆
 # =========================================================
 
 def get_official_calendar_url(year):
-    """
-    從 data.gov.tw 官方資料集頁面，
-    找出指定年度的政府行政機關辦公日曆 CSV。
-
-    目前官方頁面會出現：
-    115年 → 2026
-    116年 → 2027
-
-    不直接猜 UUID，而是每天重新讀官方資料集頁面。
-    """
 
     roc_year = year - 1911
 
-    html = fetch_text(DGPA_DATASET)
+    print(
+        f"[官方] 正在尋找 {year} "
+        f"（民國 {roc_year} 年）辦公日曆..."
+    )
 
-    # 把 HTML entity 還原
+    try:
+
+        html = fetch_text(
+            DGPA_DATASET,
+            timeout=60,
+            retries=3
+        )
+
+    except Exception as error:
+
+        print(
+            f"[ERROR] 官方資料集頁面取得失敗："
+            f"{error}"
+        )
+
+        return None
+
+    # HTML entity
     html = (
         html
         .replace("&amp;", "&")
         .replace("&#x2F;", "/")
         .replace("&#47;", "/")
+        .replace("&quot;", '"')
     )
 
-    # 找出 href
     links = re.findall(
         r'href=["\']([^"\']+)["\']',
         html,
@@ -103,57 +231,142 @@ def get_official_calendar_url(year):
 
     for link in links:
 
-        decoded = urllib.parse.unquote(link)
+        decoded = urllib.parse.unquote(
+            link
+        )
 
+        # 找指定年度
         if str(roc_year) not in decoded:
             continue
 
+        # 必須是 CSV
         if ".csv" not in decoded.lower():
             continue
 
-        # 政府資料目前多使用 FileConversion
+        # 政府目前主要使用 FileConversion
         if "FileConversion" not in decoded:
             continue
 
         if link.startswith("/"):
-            link = "https://data.gov.tw" + link
+            link = (
+                "https://data.gov.tw"
+                + link
+            )
 
-        candidates.append(link)
+        elif link.startswith(
+            "//"
+        ):
+            link = "https:" + link
 
-    # 優先選一般辦公日曆，
-    # 不選 Google 行事曆專用版本
+        elif link.startswith(
+            "http://"
+        ):
+            link = (
+                "https://"
+                + link[len("http://"):]
+            )
+
+        candidates.append(
+            link
+        )
+
+    # 優先一般辦公日曆
+    # 排除 Google 行事曆專用版本
     for link in candidates:
-        decoded = urllib.parse.unquote(link)
+
+        decoded = urllib.parse.unquote(
+            link
+        )
 
         if "Google" not in decoded:
+
+            print(
+                f"[官方] 找到 {year} CSV："
+                f"{link}"
+            )
+
             return link
 
     if candidates:
+
+        print(
+            f"[官方] 找到 {year} CSV："
+            f"{candidates[0]}"
+        )
+
         return candidates[0]
+
+    print(
+        f"[ERROR] 找不到 {year} 官方辦公日曆 CSV"
+    )
 
     return None
 
 
+def decode_csv(raw):
+
+    encodings = [
+        "utf-8-sig",
+        "utf-8",
+        "cp950",
+        "big5",
+    ]
+
+    for encoding in encodings:
+
+        try:
+
+            return raw.decode(
+                encoding
+            )
+
+        except UnicodeDecodeError:
+
+            continue
+
+    return raw.decode(
+        "utf-8",
+        errors="replace"
+    )
+
+
 def get_official_holidays(year):
 
-    url = get_official_calendar_url(year)
+    url = get_official_calendar_url(
+        year
+    )
 
     if not url:
-        print(f"找不到 {year} 官方辦公日曆 CSV")
         return []
-
-    print(f"{year} 官方辦公日曆：{url}")
 
     try:
-        text = fetch_text(url, timeout=90)
+
+        print(
+            f"[官方] 正在下載 {year} CSV..."
+        )
+
+        raw = fetch_bytes(
+            url,
+            timeout=120,
+            retries=3
+        )
+
     except Exception as error:
-        print(f"{year} CSV 下載失敗：{error}")
+
+        print(
+            f"[ERROR] {year} CSV 下載失敗："
+            f"{error}"
+        )
+
         return []
 
-    # CSV 有可能是 UTF-8 BOM
-    text = text.lstrip("\ufeff")
+    text = decode_csv(
+        raw
+    )
 
-    reader = csv.DictReader(io.StringIO(text))
+    reader = csv.DictReader(
+        io.StringIO(text)
+    )
 
     holidays = []
 
@@ -161,6 +374,7 @@ def get_official_holidays(year):
 
         raw_date = (
             row.get("西元日期")
+            or row.get("\ufeff西元日期")
             or row.get("日期")
             or row.get("date")
             or ""
@@ -178,7 +392,9 @@ def get_official_holidays(year):
         if holiday_value != "2":
             continue
 
-        event_date = normalize_date(raw_date)
+        event_date = normalize_date(
+            raw_date
+        )
 
         if not event_date:
             continue
@@ -190,22 +406,34 @@ def get_official_holidays(year):
             or ""
         ).strip()
 
+        # 官方備註通常就是：
+        # 元旦、春節、228和平紀念日、
+        # 兒童節、清明節、端午節、
+        # 中秋節、國慶日、補假等等。
+        title = description
+
+        if not title:
+            title = "台灣政府放假日"
+
+        title = (
+            "🇹🇼 "
+            + title
+        )
+
         holidays.append({
             "date": event_date,
-            "title": "🇹🇼 台灣放假日",
+            "title": title,
             "description": (
                 "資料來源：行政院人事行政總處"
-                "\n政府行政機關辦公日曆表"
-                + (
-                    "\n備註：" + description
-                    if description
-                    else ""
-                )
+                "\n"
+                "中華民國政府行政機關辦公日曆表"
+                "\n"
+                f"資料年度：{year}"
             )
         })
 
     print(
-        f"{year} 官方放假日取得："
+        f"[完成] {year} 官方放假日："
         f"{len(holidays)} 天"
     )
 
@@ -218,36 +446,59 @@ def get_official_holidays(year):
 
 def get_kaohsiung_closures():
 
+    print(
+        "[高雄] 正在取得天然災害停班停課資料..."
+    )
+
     try:
+
         data = fetch_json(
             KAOHSIUNG_API,
-            timeout=90
+            timeout=120,
+            retries=4
         )
+
     except Exception as error:
+
         print(
-            "高雄停班停課資料取得失敗："
+            "[ERROR] 高雄停班停課資料取得失敗："
             f"{error}"
         )
+
         return []
 
-    records = find_records(data)
+    records = find_records(
+        data
+    )
+
+    print(
+        f"[高雄] API 回傳資料："
+        f"{len(records)} 筆"
+    )
 
     events = []
 
     for record in records:
 
-        text = json.dumps(
+        if not isinstance(
+            record,
+            dict
+        ):
+            continue
+
+        full_text = json.dumps(
             record,
             ensure_ascii=False
         )
 
         normalized = (
-            text
+            full_text
             .replace(" ", "")
             .replace("\n", "")
+            .replace("\r", "")
         )
 
-        # 只處理停止上班／停止上課
+        # 只抓停止上班／上課
         if not any(
             keyword in normalized
             for keyword in [
@@ -259,7 +510,7 @@ def get_kaohsiung_closures():
         ):
             continue
 
-        # 排除「照常」
+        # 排除照常
         if any(
             keyword in normalized
             for keyword in [
@@ -270,7 +521,9 @@ def get_kaohsiung_closures():
         ):
             continue
 
-        dates = extract_dates(record)
+        dates = extract_dates(
+            record
+        )
 
         for event_date in dates:
 
@@ -279,14 +532,35 @@ def get_kaohsiung_closures():
                 "title": "🌪️ 高雄市停班停課",
                 "description": (
                     "資料來源：高雄市政府人事處"
-                    "\n天然災害停止上班上課相關訊息"
                     "\n"
-                    + format_record(record)
+                    "天然災害停止上班上課相關訊息"
+                    "\n"
+                    + format_record(
+                        record
+                    )
                 )
             })
 
+    # 去重
+    unique = {}
+
+    for item in events:
+
+        unique[
+            item["date"]
+        ] = item
+
+    events = list(
+        unique.values()
+    )
+
+    events.sort(
+        key=lambda item:
+        item["date"]
+    )
+
     print(
-        "高雄停班停課資料取得："
+        f"[完成] 高雄停班停課："
         f"{len(events)} 筆"
     )
 
@@ -295,10 +569,16 @@ def get_kaohsiung_closures():
 
 def find_records(data):
 
-    if isinstance(data, list):
+    if isinstance(
+        data,
+        list
+    ):
         return data
 
-    if not isinstance(data, dict):
+    if not isinstance(
+        data,
+        dict
+    ):
         return []
 
     preferred = [
@@ -316,14 +596,20 @@ def find_records(data):
 
         if key in data:
 
-            result = find_records(data[key])
+            result = find_records(
+                data[key]
+            )
 
             if result:
                 return result
 
     for value in data.values():
 
-        if isinstance(value, list):
+        if isinstance(
+            value,
+            list
+        ):
+
             return value
 
     return []
@@ -338,7 +624,10 @@ def extract_dates(record):
 
     dates = set()
 
+    # -----------------------------------------------------
     # 西元日期
+    # -----------------------------------------------------
+
     western = re.findall(
         r"20\d{2}[/-]\d{1,2}[/-]\d{1,2}",
         text
@@ -346,12 +635,19 @@ def extract_dates(record):
 
     for value in western:
 
-        normalized = normalize_date(value)
+        normalized = normalize_date(
+            value
+        )
 
         if normalized:
-            dates.add(normalized)
+            dates.add(
+                normalized
+            )
 
+    # -----------------------------------------------------
     # 民國日期
+    # -----------------------------------------------------
+
     roc = re.findall(
         r"1\d{2}[/-]\d{1,2}[/-]\d{1,2}",
         text
@@ -367,11 +663,20 @@ def extract_dates(record):
         if len(parts) != 3:
             continue
 
-        year = int(parts[0]) + 1911
-        month = int(parts[1])
-        day = int(parts[2])
-
         try:
+
+            year = (
+                int(parts[0])
+                + 1911
+            )
+
+            month = int(
+                parts[1]
+            )
+
+            day = int(
+                parts[2]
+            )
 
             event_date = date(
                 year,
@@ -384,9 +689,12 @@ def extract_dates(record):
             )
 
         except ValueError:
+
             pass
 
-    return sorted(dates)
+    return sorted(
+        dates
+    )
 
 
 # =========================================================
@@ -396,10 +704,18 @@ def extract_dates(record):
 def mothers_day(year):
 
     # 五月第二個星期日
-    d = date(year, 5, 1)
+
+    d = date(
+        year,
+        5,
+        1
+    )
 
     while d.weekday() != 6:
-        d += timedelta(days=1)
+
+        d += timedelta(
+            days=1
+        )
 
     return (
         d + timedelta(days=7)
@@ -407,7 +723,7 @@ def mothers_day(year):
 
 
 # =========================================================
-# ICS 工具
+# ICS
 # =========================================================
 
 def escape_ics(value):
@@ -428,45 +744,58 @@ def make_event(
     description
 ):
 
-    d = date.fromisoformat(event_date)
+    d = date.fromisoformat(
+        event_date
+    )
 
     end_date = (
         d + timedelta(days=1)
-    ).isoformat()
+    )
 
     return "\r\n".join([
         "BEGIN:VEVENT",
+
         f"UID:{uid}@taiwan-calendar",
+
         (
             "DTSTART;VALUE=DATE:"
             f"{d.strftime('%Y%m%d')}"
         ),
+
         (
             "DTEND;VALUE=DATE:"
-            f"{end_date.replace('-', '')}"
+            f"{end_date.strftime('%Y%m%d')}"
         ),
+
         f"SUMMARY:{escape_ics(title)}",
+
         (
             "DESCRIPTION:"
             f"{escape_ics(description)}"
         ),
+
         "END:VEVENT",
     ])
 
 
 def format_record(record):
 
-    parts = []
-
-    if not isinstance(record, dict):
+    if not isinstance(
+        record,
+        dict
+    ):
         return str(record)
+
+    parts = []
 
     for key, value in record.items():
 
         if value is None:
             continue
 
-        value = str(value).strip()
+        value = str(
+            value
+        ).strip()
 
         if not value:
             continue
@@ -475,7 +804,9 @@ def format_record(record):
             f"{key}：{value}"
         )
 
-    return "\n".join(parts)
+    return "\n".join(
+        parts
+    )
 
 
 # =========================================================
@@ -486,16 +817,33 @@ def generate_calendar():
 
     today = date.today()
 
+    # 永遠自動產生：
     # 今年 + 明年
     years = [
         today.year,
         today.year + 1
     ]
 
+    print("")
+    print(
+        "=========================================="
+    )
+    print(
+        "🇹🇼 台灣生活行事曆開始更新"
+    )
+    print(
+        f"更新年度：{years[0]} + {years[1]}"
+    )
+    print(
+        "=========================================="
+    )
+
     events = []
 
+    official_count = {}
+
     # -----------------------------------------------------
-    # 官方國定／政府行政機關放假日
+    # 官方國定假日
     # -----------------------------------------------------
 
     for year in years:
@@ -504,6 +852,12 @@ def generate_calendar():
 
             holidays = get_official_holidays(
                 year
+            )
+
+            official_count[
+                year
+            ] = len(
+                holidays
             )
 
             for item in holidays:
@@ -519,9 +873,13 @@ def generate_calendar():
 
         except Exception as error:
 
+            official_count[
+                year
+            ] = 0
+
             print(
-                f"官方辦公日曆 {year} "
-                f"取得失敗：{error}"
+                f"[ERROR] {year} 官方資料處理失敗："
+                f"{error}"
             )
 
     # -----------------------------------------------------
@@ -530,7 +888,9 @@ def generate_calendar():
 
     for year in years:
 
-        event_date = mothers_day(year)
+        event_date = mothers_day(
+            year
+        )
 
         events.append(
             make_event(
@@ -547,7 +907,9 @@ def generate_calendar():
 
     for year in years:
 
-        event_date = f"{year}-08-08"
+        event_date = (
+            f"{year}-08-08"
+        )
 
         events.append(
             make_event(
@@ -564,13 +926,18 @@ def generate_calendar():
 
     try:
 
-        closures = get_kaohsiung_closures()
+        closures = (
+            get_kaohsiung_closures()
+        )
 
         for item in closures:
 
             events.append(
                 make_event(
-                    f"kaohsiung-{item['date']}",
+                    (
+                        "kaohsiung-"
+                        f"{item['date']}"
+                    ),
                     item["date"],
                     item["title"],
                     item["description"]
@@ -580,12 +947,14 @@ def generate_calendar():
     except Exception as error:
 
         print(
-            "高雄停班停課取得失敗："
+            "[ERROR] 高雄停班停課處理失敗："
             f"{error}"
         )
 
+        closures = []
+
     # -----------------------------------------------------
-    # 去除重複 UID
+    # UID 去重
     # -----------------------------------------------------
 
     unique = {}
@@ -594,22 +963,29 @@ def generate_calendar():
 
         uid = None
 
-        for line in event.split("\r\n"):
+        for line in event.split(
+            "\r\n"
+        ):
 
-            if line.startswith("UID:"):
+            if line.startswith(
+                "UID:"
+            ):
 
                 uid = line
                 break
 
         if uid:
-            unique[uid] = event
+
+            unique[
+                uid
+            ] = event
 
     events = list(
         unique.values()
     )
 
     # -----------------------------------------------------
-    # 按日期排序
+    # 日期排序
     # -----------------------------------------------------
 
     events.sort(
@@ -618,37 +994,92 @@ def generate_calendar():
         .split(
             "DTSTART;VALUE=DATE:"
         )[1]
-        .split("\r\n")[0]
+        .split(
+            "\r\n"
+        )[0]
     )
 
     # -----------------------------------------------------
-    # 建立 VCALENDAR
+    # VCALENDAR
     # -----------------------------------------------------
 
     calendar = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
+
         (
             "PRODID:"
             "//Taiwan Life Calendar"
             "//GitHub//ZH-TW"
         ),
+
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
+
         f"X-WR-CALNAME:{CALENDAR_NAME}",
+
         "X-WR-TIMEZONE:Asia/Taipei",
     ]
 
-    calendar.extend(events)
+    calendar.extend(
+        events
+    )
 
     calendar.append(
         "END:VCALENDAR"
     )
 
-    return (
-        "\r\n".join(calendar)
+    ics = (
+        "\r\n".join(
+            calendar
+        )
         + "\r\n"
     )
+
+    # -----------------------------------------------------
+    # 最終統計
+    # -----------------------------------------------------
+
+    print("")
+    print(
+        "=========================================="
+    )
+
+    print(
+        f"[統計] {years[0]} 官方放假："
+        f"{official_count.get(years[0], 0)} 天"
+    )
+
+    print(
+        f"[統計] {years[1]} 官方放假："
+        f"{official_count.get(years[1], 0)} 天"
+    )
+
+    print(
+        f"[統計] 高雄停班停課："
+        f"{len(closures)} 筆"
+    )
+
+    print(
+        "[統計] 母親節："
+        f"{len(years)} 筆"
+    )
+
+    print(
+        "[統計] 父親節："
+        f"{len(years)} 筆"
+    )
+
+    print(
+        f"[統計] 總行事曆事件："
+        f"{len(events)} 個"
+    )
+
+    print(
+        "=========================================="
+    )
+
+    return ics
 
 
 # =========================================================
@@ -666,14 +1097,24 @@ if __name__ == "__main__":
         newline=""
     ) as file:
 
-        file.write(ics)
+        file.write(
+            ics
+        )
+
+    print("")
+    print(
+        "=========================================="
+    )
 
     print(
-        "========================================"
+        "✅ taiwan.ics 產生完成！"
     )
+
     print(
-        "taiwan.ics 產生完成！"
+        f"✅ 共 {ics.count('BEGIN:VEVENT')} "
+        "個行事曆事件"
     )
+
     print(
-        "========================================"
+        "=========================================="
     )
