@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install lunardate requests
+          pip install requests urllib3
 
       - name: Generate calendar
         run: |
