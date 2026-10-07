@@ -6,11 +6,529 @@ METHOD:PUBLISH
 X-WR-CALNAME:🇹🇼 台灣生活行事曆
 X-WR-TIMEZONE:Asia/Taipei
 BEGIN:VEVENT
+UID:official-2026-01-01@taiwan-calendar
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+SUMMARY:🇹🇼 開國紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-03@taiwan-calendar
+DTSTART;VALUE=DATE:20260103
+DTEND;VALUE=DATE:20260104
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-04@taiwan-calendar
+DTSTART;VALUE=DATE:20260104
+DTEND;VALUE=DATE:20260105
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-10@taiwan-calendar
+DTSTART;VALUE=DATE:20260110
+DTEND;VALUE=DATE:20260111
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-11@taiwan-calendar
+DTSTART;VALUE=DATE:20260111
+DTEND;VALUE=DATE:20260112
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-17@taiwan-calendar
+DTSTART;VALUE=DATE:20260117
+DTEND;VALUE=DATE:20260118
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-18@taiwan-calendar
+DTSTART;VALUE=DATE:20260118
+DTEND;VALUE=DATE:20260119
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-24@taiwan-calendar
+DTSTART;VALUE=DATE:20260124
+DTEND;VALUE=DATE:20260125
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-25@taiwan-calendar
+DTSTART;VALUE=DATE:20260125
+DTEND;VALUE=DATE:20260126
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-01-31@taiwan-calendar
+DTSTART;VALUE=DATE:20260131
+DTEND;VALUE=DATE:20260201
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-01@taiwan-calendar
+DTSTART;VALUE=DATE:20260201
+DTEND;VALUE=DATE:20260202
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-07@taiwan-calendar
+DTSTART;VALUE=DATE:20260207
+DTEND;VALUE=DATE:20260208
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-08@taiwan-calendar
+DTSTART;VALUE=DATE:20260208
+DTEND;VALUE=DATE:20260209
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-14@taiwan-calendar
+DTSTART;VALUE=DATE:20260214
+DTEND;VALUE=DATE:20260215
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-15@taiwan-calendar
+DTSTART;VALUE=DATE:20260215
+DTEND;VALUE=DATE:20260216
+SUMMARY:🇹🇼 小年夜
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-16@taiwan-calendar
+DTSTART;VALUE=DATE:20260216
+DTEND;VALUE=DATE:20260217
+SUMMARY:🇹🇼 農曆除夕
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-17@taiwan-calendar
+DTSTART;VALUE=DATE:20260217
+DTEND;VALUE=DATE:20260218
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-18@taiwan-calendar
+DTSTART;VALUE=DATE:20260218
+DTEND;VALUE=DATE:20260219
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-19@taiwan-calendar
+DTSTART;VALUE=DATE:20260219
+DTEND;VALUE=DATE:20260220
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-20@taiwan-calendar
+DTSTART;VALUE=DATE:20260220
+DTEND;VALUE=DATE:20260221
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-21@taiwan-calendar
+DTSTART;VALUE=DATE:20260221
+DTEND;VALUE=DATE:20260222
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-22@taiwan-calendar
+DTSTART;VALUE=DATE:20260222
+DTEND;VALUE=DATE:20260223
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-27@taiwan-calendar
+DTSTART;VALUE=DATE:20260227
+DTEND;VALUE=DATE:20260228
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-02-28@taiwan-calendar
+DTSTART;VALUE=DATE:20260228
+DTEND;VALUE=DATE:20260301
+SUMMARY:🇹🇼 和平紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-01@taiwan-calendar
+DTSTART;VALUE=DATE:20260301
+DTEND;VALUE=DATE:20260302
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-07@taiwan-calendar
+DTSTART;VALUE=DATE:20260307
+DTEND;VALUE=DATE:20260308
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-08@taiwan-calendar
+DTSTART;VALUE=DATE:20260308
+DTEND;VALUE=DATE:20260309
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-14@taiwan-calendar
+DTSTART;VALUE=DATE:20260314
+DTEND;VALUE=DATE:20260315
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-15@taiwan-calendar
+DTSTART;VALUE=DATE:20260315
+DTEND;VALUE=DATE:20260316
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-21@taiwan-calendar
+DTSTART;VALUE=DATE:20260321
+DTEND;VALUE=DATE:20260322
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-22@taiwan-calendar
+DTSTART;VALUE=DATE:20260322
+DTEND;VALUE=DATE:20260323
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-28@taiwan-calendar
+DTSTART;VALUE=DATE:20260328
+DTEND;VALUE=DATE:20260329
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-03-29@taiwan-calendar
+DTSTART;VALUE=DATE:20260329
+DTEND;VALUE=DATE:20260330
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-03@taiwan-calendar
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-04@taiwan-calendar
+DTSTART;VALUE=DATE:20260404
+DTEND;VALUE=DATE:20260405
+SUMMARY:🇹🇼 兒童節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-05@taiwan-calendar
+DTSTART;VALUE=DATE:20260405
+DTEND;VALUE=DATE:20260406
+SUMMARY:🇹🇼 清明節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-06@taiwan-calendar
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-11@taiwan-calendar
+DTSTART;VALUE=DATE:20260411
+DTEND;VALUE=DATE:20260412
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-12@taiwan-calendar
+DTSTART;VALUE=DATE:20260412
+DTEND;VALUE=DATE:20260413
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-18@taiwan-calendar
+DTSTART;VALUE=DATE:20260418
+DTEND;VALUE=DATE:20260419
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-19@taiwan-calendar
+DTSTART;VALUE=DATE:20260419
+DTEND;VALUE=DATE:20260420
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-25@taiwan-calendar
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260426
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-04-26@taiwan-calendar
+DTSTART;VALUE=DATE:20260426
+DTEND;VALUE=DATE:20260427
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-01@taiwan-calendar
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+SUMMARY:🇹🇼 勞動節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-02@taiwan-calendar
+DTSTART;VALUE=DATE:20260502
+DTEND;VALUE=DATE:20260503
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-03@taiwan-calendar
+DTSTART;VALUE=DATE:20260503
+DTEND;VALUE=DATE:20260504
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-09@taiwan-calendar
+DTSTART;VALUE=DATE:20260509
+DTEND;VALUE=DATE:20260510
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-10@taiwan-calendar
+DTSTART;VALUE=DATE:20260510
+DTEND;VALUE=DATE:20260511
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
 UID:mothers-day-2026@taiwan-calendar
 DTSTART;VALUE=DATE:20260510
 DTEND;VALUE=DATE:20260511
 SUMMARY:❤️ 母親節
 DESCRIPTION:備注｜台灣常見慶祝節日，不屬政府國定假日
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-16@taiwan-calendar
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20260517
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-17@taiwan-calendar
+DTSTART;VALUE=DATE:20260517
+DTEND;VALUE=DATE:20260518
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-23@taiwan-calendar
+DTSTART;VALUE=DATE:20260523
+DTEND;VALUE=DATE:20260524
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-24@taiwan-calendar
+DTSTART;VALUE=DATE:20260524
+DTEND;VALUE=DATE:20260525
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-30@taiwan-calendar
+DTSTART;VALUE=DATE:20260530
+DTEND;VALUE=DATE:20260531
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-05-31@taiwan-calendar
+DTSTART;VALUE=DATE:20260531
+DTEND;VALUE=DATE:20260601
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-06@taiwan-calendar
+DTSTART;VALUE=DATE:20260606
+DTEND;VALUE=DATE:20260607
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-07@taiwan-calendar
+DTSTART;VALUE=DATE:20260607
+DTEND;VALUE=DATE:20260608
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-13@taiwan-calendar
+DTSTART;VALUE=DATE:20260613
+DTEND;VALUE=DATE:20260614
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-14@taiwan-calendar
+DTSTART;VALUE=DATE:20260614
+DTEND;VALUE=DATE:20260615
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-19@taiwan-calendar
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260620
+SUMMARY:🇹🇼 端午節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-20@taiwan-calendar
+DTSTART;VALUE=DATE:20260620
+DTEND;VALUE=DATE:20260621
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-21@taiwan-calendar
+DTSTART;VALUE=DATE:20260621
+DTEND;VALUE=DATE:20260622
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-27@taiwan-calendar
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-06-28@taiwan-calendar
+DTSTART;VALUE=DATE:20260628
+DTEND;VALUE=DATE:20260629
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-04@taiwan-calendar
+DTSTART;VALUE=DATE:20260704
+DTEND;VALUE=DATE:20260705
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-05@taiwan-calendar
+DTSTART;VALUE=DATE:20260705
+DTEND;VALUE=DATE:20260706
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-11@taiwan-calendar
+DTSTART;VALUE=DATE:20260711
+DTEND;VALUE=DATE:20260712
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-12@taiwan-calendar
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-18@taiwan-calendar
+DTSTART;VALUE=DATE:20260718
+DTEND;VALUE=DATE:20260719
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-19@taiwan-calendar
+DTSTART;VALUE=DATE:20260719
+DTEND;VALUE=DATE:20260720
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-25@taiwan-calendar
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-07-26@taiwan-calendar
+DTSTART;VALUE=DATE:20260726
+DTEND;VALUE=DATE:20260727
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-01@taiwan-calendar
+DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260802
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-02@taiwan-calendar
+DTSTART;VALUE=DATE:20260802
+DTEND;VALUE=DATE:20260803
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-08@taiwan-calendar
+DTSTART;VALUE=DATE:20260808
+DTEND;VALUE=DATE:20260809
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
 END:VEVENT
 BEGIN:VEVENT
 UID:fathers-day-2026@taiwan-calendar
@@ -20,6 +538,664 @@ SUMMARY:💙 父親節
 DESCRIPTION:備注｜台灣常見慶祝節日，不屬政府國定假日
 END:VEVENT
 BEGIN:VEVENT
+UID:official-2026-08-09@taiwan-calendar
+DTSTART;VALUE=DATE:20260809
+DTEND;VALUE=DATE:20260810
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-15@taiwan-calendar
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-16@taiwan-calendar
+DTSTART;VALUE=DATE:20260816
+DTEND;VALUE=DATE:20260817
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-22@taiwan-calendar
+DTSTART;VALUE=DATE:20260822
+DTEND;VALUE=DATE:20260823
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-23@taiwan-calendar
+DTSTART;VALUE=DATE:20260823
+DTEND;VALUE=DATE:20260824
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-29@taiwan-calendar
+DTSTART;VALUE=DATE:20260829
+DTEND;VALUE=DATE:20260830
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-08-30@taiwan-calendar
+DTSTART;VALUE=DATE:20260830
+DTEND;VALUE=DATE:20260831
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-05@taiwan-calendar
+DTSTART;VALUE=DATE:20260905
+DTEND;VALUE=DATE:20260906
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-06@taiwan-calendar
+DTSTART;VALUE=DATE:20260906
+DTEND;VALUE=DATE:20260907
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-12@taiwan-calendar
+DTSTART;VALUE=DATE:20260912
+DTEND;VALUE=DATE:20260913
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-13@taiwan-calendar
+DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-19@taiwan-calendar
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20260920
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-20@taiwan-calendar
+DTSTART;VALUE=DATE:20260920
+DTEND;VALUE=DATE:20260921
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-25@taiwan-calendar
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:🇹🇼 中秋節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-26@taiwan-calendar
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20260927
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-27@taiwan-calendar
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-09-28@taiwan-calendar
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+SUMMARY:🇹🇼 孔子誕辰紀念日/教師節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-03@taiwan-calendar
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-04@taiwan-calendar
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-09@taiwan-calendar
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-10@taiwan-calendar
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🇹🇼 國慶日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-11@taiwan-calendar
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-17@taiwan-calendar
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-18@taiwan-calendar
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-24@taiwan-calendar
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-25@taiwan-calendar
+DTSTART;VALUE=DATE:20261025
+DTEND;VALUE=DATE:20261026
+SUMMARY:🇹🇼 臺灣光復暨金門古寧頭大捷紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-26@taiwan-calendar
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261027
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-10-31@taiwan-calendar
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-01@taiwan-calendar
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-07@taiwan-calendar
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-08@taiwan-calendar
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-14@taiwan-calendar
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-15@taiwan-calendar
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-21@taiwan-calendar
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-22@taiwan-calendar
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-28@taiwan-calendar
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-11-29@taiwan-calendar
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-05@taiwan-calendar
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-06@taiwan-calendar
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-12@taiwan-calendar
+DTSTART;VALUE=DATE:20261212
+DTEND;VALUE=DATE:20261213
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-13@taiwan-calendar
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261214
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-19@taiwan-calendar
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-20@taiwan-calendar
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-25@taiwan-calendar
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:🇹🇼 行憲紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-26@taiwan-calendar
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2026-12-27@taiwan-calendar
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2026
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-01@taiwan-calendar
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:🇹🇼 開國紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-02@taiwan-calendar
+DTSTART;VALUE=DATE:20270102
+DTEND;VALUE=DATE:20270103
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-03@taiwan-calendar
+DTSTART;VALUE=DATE:20270103
+DTEND;VALUE=DATE:20270104
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-09@taiwan-calendar
+DTSTART;VALUE=DATE:20270109
+DTEND;VALUE=DATE:20270110
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-10@taiwan-calendar
+DTSTART;VALUE=DATE:20270110
+DTEND;VALUE=DATE:20270111
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-16@taiwan-calendar
+DTSTART;VALUE=DATE:20270116
+DTEND;VALUE=DATE:20270117
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-17@taiwan-calendar
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-23@taiwan-calendar
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-24@taiwan-calendar
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-30@taiwan-calendar
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-01-31@taiwan-calendar
+DTSTART;VALUE=DATE:20270131
+DTEND;VALUE=DATE:20270201
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-04@taiwan-calendar
+DTSTART;VALUE=DATE:20270204
+DTEND;VALUE=DATE:20270205
+SUMMARY:🇹🇼 小年夜
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-05@taiwan-calendar
+DTSTART;VALUE=DATE:20270205
+DTEND;VALUE=DATE:20270206
+SUMMARY:🇹🇼 農曆除夕
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-06@taiwan-calendar
+DTSTART;VALUE=DATE:20270206
+DTEND;VALUE=DATE:20270207
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-07@taiwan-calendar
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-08@taiwan-calendar
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270209
+SUMMARY:🇹🇼 春節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-09@taiwan-calendar
+DTSTART;VALUE=DATE:20270209
+DTEND;VALUE=DATE:20270210
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-10@taiwan-calendar
+DTSTART;VALUE=DATE:20270210
+DTEND;VALUE=DATE:20270211
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-13@taiwan-calendar
+DTSTART;VALUE=DATE:20270213
+DTEND;VALUE=DATE:20270214
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-14@taiwan-calendar
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-20@taiwan-calendar
+DTSTART;VALUE=DATE:20270220
+DTEND;VALUE=DATE:20270221
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-21@taiwan-calendar
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-27@taiwan-calendar
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-02-28@taiwan-calendar
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:🇹🇼 和平紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-01@taiwan-calendar
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-06@taiwan-calendar
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-07@taiwan-calendar
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-13@taiwan-calendar
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-14@taiwan-calendar
+DTSTART;VALUE=DATE:20270314
+DTEND;VALUE=DATE:20270315
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-20@taiwan-calendar
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270321
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-21@taiwan-calendar
+DTSTART;VALUE=DATE:20270321
+DTEND;VALUE=DATE:20270322
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-27@taiwan-calendar
+DTSTART;VALUE=DATE:20270327
+DTEND;VALUE=DATE:20270328
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-03-28@taiwan-calendar
+DTSTART;VALUE=DATE:20270328
+DTEND;VALUE=DATE:20270329
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-03@taiwan-calendar
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-04@taiwan-calendar
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:🇹🇼 兒童節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-05@taiwan-calendar
+DTSTART;VALUE=DATE:20270405
+DTEND;VALUE=DATE:20270406
+SUMMARY:🇹🇼 清明節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-06@taiwan-calendar
+DTSTART;VALUE=DATE:20270406
+DTEND;VALUE=DATE:20270407
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-10@taiwan-calendar
+DTSTART;VALUE=DATE:20270410
+DTEND;VALUE=DATE:20270411
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-11@taiwan-calendar
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-17@taiwan-calendar
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-18@taiwan-calendar
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-24@taiwan-calendar
+DTSTART;VALUE=DATE:20270424
+DTEND;VALUE=DATE:20270425
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-25@taiwan-calendar
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-04-30@taiwan-calendar
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-01@taiwan-calendar
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:🇹🇼 勞動節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-02@taiwan-calendar
+DTSTART;VALUE=DATE:20270502
+DTEND;VALUE=DATE:20270503
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-08@taiwan-calendar
+DTSTART;VALUE=DATE:20270508
+DTEND;VALUE=DATE:20270509
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-09@taiwan-calendar
+DTSTART;VALUE=DATE:20270509
+DTEND;VALUE=DATE:20270510
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
 UID:mothers-day-2027@taiwan-calendar
 DTSTART;VALUE=DATE:20270509
 DTEND;VALUE=DATE:20270510
@@ -27,10 +1203,521 @@ SUMMARY:❤️ 母親節
 DESCRIPTION:備注｜台灣常見慶祝節日，不屬政府國定假日
 END:VEVENT
 BEGIN:VEVENT
+UID:official-2027-05-15@taiwan-calendar
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-16@taiwan-calendar
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-22@taiwan-calendar
+DTSTART;VALUE=DATE:20270522
+DTEND;VALUE=DATE:20270523
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-23@taiwan-calendar
+DTSTART;VALUE=DATE:20270523
+DTEND;VALUE=DATE:20270524
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-29@taiwan-calendar
+DTSTART;VALUE=DATE:20270529
+DTEND;VALUE=DATE:20270530
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-05-30@taiwan-calendar
+DTSTART;VALUE=DATE:20270530
+DTEND;VALUE=DATE:20270531
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-05@taiwan-calendar
+DTSTART;VALUE=DATE:20270605
+DTEND;VALUE=DATE:20270606
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-06@taiwan-calendar
+DTSTART;VALUE=DATE:20270606
+DTEND;VALUE=DATE:20270607
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-09@taiwan-calendar
+DTSTART;VALUE=DATE:20270609
+DTEND;VALUE=DATE:20270610
+SUMMARY:🇹🇼 端午節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-12@taiwan-calendar
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270613
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-13@taiwan-calendar
+DTSTART;VALUE=DATE:20270613
+DTEND;VALUE=DATE:20270614
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-19@taiwan-calendar
+DTSTART;VALUE=DATE:20270619
+DTEND;VALUE=DATE:20270620
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-20@taiwan-calendar
+DTSTART;VALUE=DATE:20270620
+DTEND;VALUE=DATE:20270621
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-26@taiwan-calendar
+DTSTART;VALUE=DATE:20270626
+DTEND;VALUE=DATE:20270627
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-06-27@taiwan-calendar
+DTSTART;VALUE=DATE:20270627
+DTEND;VALUE=DATE:20270628
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-03@taiwan-calendar
+DTSTART;VALUE=DATE:20270703
+DTEND;VALUE=DATE:20270704
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-04@taiwan-calendar
+DTSTART;VALUE=DATE:20270704
+DTEND;VALUE=DATE:20270705
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-10@taiwan-calendar
+DTSTART;VALUE=DATE:20270710
+DTEND;VALUE=DATE:20270711
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-11@taiwan-calendar
+DTSTART;VALUE=DATE:20270711
+DTEND;VALUE=DATE:20270712
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-17@taiwan-calendar
+DTSTART;VALUE=DATE:20270717
+DTEND;VALUE=DATE:20270718
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-18@taiwan-calendar
+DTSTART;VALUE=DATE:20270718
+DTEND;VALUE=DATE:20270719
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-24@taiwan-calendar
+DTSTART;VALUE=DATE:20270724
+DTEND;VALUE=DATE:20270725
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-25@taiwan-calendar
+DTSTART;VALUE=DATE:20270725
+DTEND;VALUE=DATE:20270726
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-07-31@taiwan-calendar
+DTSTART;VALUE=DATE:20270731
+DTEND;VALUE=DATE:20270801
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-01@taiwan-calendar
+DTSTART;VALUE=DATE:20270801
+DTEND;VALUE=DATE:20270802
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-07@taiwan-calendar
+DTSTART;VALUE=DATE:20270807
+DTEND;VALUE=DATE:20270808
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-08@taiwan-calendar
+DTSTART;VALUE=DATE:20270808
+DTEND;VALUE=DATE:20270809
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
 UID:fathers-day-2027@taiwan-calendar
 DTSTART;VALUE=DATE:20270808
 DTEND;VALUE=DATE:20270809
 SUMMARY:💙 父親節
 DESCRIPTION:備注｜台灣常見慶祝節日，不屬政府國定假日
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-14@taiwan-calendar
+DTSTART;VALUE=DATE:20270814
+DTEND;VALUE=DATE:20270815
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-15@taiwan-calendar
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270816
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-21@taiwan-calendar
+DTSTART;VALUE=DATE:20270821
+DTEND;VALUE=DATE:20270822
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-22@taiwan-calendar
+DTSTART;VALUE=DATE:20270822
+DTEND;VALUE=DATE:20270823
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-28@taiwan-calendar
+DTSTART;VALUE=DATE:20270828
+DTEND;VALUE=DATE:20270829
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-08-29@taiwan-calendar
+DTSTART;VALUE=DATE:20270829
+DTEND;VALUE=DATE:20270830
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-04@taiwan-calendar
+DTSTART;VALUE=DATE:20270904
+DTEND;VALUE=DATE:20270905
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-05@taiwan-calendar
+DTSTART;VALUE=DATE:20270905
+DTEND;VALUE=DATE:20270906
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-11@taiwan-calendar
+DTSTART;VALUE=DATE:20270911
+DTEND;VALUE=DATE:20270912
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-12@taiwan-calendar
+DTSTART;VALUE=DATE:20270912
+DTEND;VALUE=DATE:20270913
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-15@taiwan-calendar
+DTSTART;VALUE=DATE:20270915
+DTEND;VALUE=DATE:20270916
+SUMMARY:🇹🇼 中秋節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-18@taiwan-calendar
+DTSTART;VALUE=DATE:20270918
+DTEND;VALUE=DATE:20270919
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-19@taiwan-calendar
+DTSTART;VALUE=DATE:20270919
+DTEND;VALUE=DATE:20270920
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-25@taiwan-calendar
+DTSTART;VALUE=DATE:20270925
+DTEND;VALUE=DATE:20270926
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-26@taiwan-calendar
+DTSTART;VALUE=DATE:20270926
+DTEND;VALUE=DATE:20270927
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-09-28@taiwan-calendar
+DTSTART;VALUE=DATE:20270928
+DTEND;VALUE=DATE:20270929
+SUMMARY:🇹🇼 孔子誕辰紀念日/教師節
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-02@taiwan-calendar
+DTSTART;VALUE=DATE:20271002
+DTEND;VALUE=DATE:20271003
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-03@taiwan-calendar
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-09@taiwan-calendar
+DTSTART;VALUE=DATE:20271009
+DTEND;VALUE=DATE:20271010
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-10@taiwan-calendar
+DTSTART;VALUE=DATE:20271010
+DTEND;VALUE=DATE:20271011
+SUMMARY:🇹🇼 國慶日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-11@taiwan-calendar
+DTSTART;VALUE=DATE:20271011
+DTEND;VALUE=DATE:20271012
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-16@taiwan-calendar
+DTSTART;VALUE=DATE:20271016
+DTEND;VALUE=DATE:20271017
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-17@taiwan-calendar
+DTSTART;VALUE=DATE:20271017
+DTEND;VALUE=DATE:20271018
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-23@taiwan-calendar
+DTSTART;VALUE=DATE:20271023
+DTEND;VALUE=DATE:20271024
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-24@taiwan-calendar
+DTSTART;VALUE=DATE:20271024
+DTEND;VALUE=DATE:20271025
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-25@taiwan-calendar
+DTSTART;VALUE=DATE:20271025
+DTEND;VALUE=DATE:20271026
+SUMMARY:🇹🇼 臺灣光復暨金門古寧頭大捷紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-30@taiwan-calendar
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-10-31@taiwan-calendar
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-06@taiwan-calendar
+DTSTART;VALUE=DATE:20271106
+DTEND;VALUE=DATE:20271107
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-07@taiwan-calendar
+DTSTART;VALUE=DATE:20271107
+DTEND;VALUE=DATE:20271108
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-13@taiwan-calendar
+DTSTART;VALUE=DATE:20271113
+DTEND;VALUE=DATE:20271114
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-14@taiwan-calendar
+DTSTART;VALUE=DATE:20271114
+DTEND;VALUE=DATE:20271115
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-20@taiwan-calendar
+DTSTART;VALUE=DATE:20271120
+DTEND;VALUE=DATE:20271121
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-21@taiwan-calendar
+DTSTART;VALUE=DATE:20271121
+DTEND;VALUE=DATE:20271122
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-27@taiwan-calendar
+DTSTART;VALUE=DATE:20271127
+DTEND;VALUE=DATE:20271128
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-11-28@taiwan-calendar
+DTSTART;VALUE=DATE:20271128
+DTEND;VALUE=DATE:20271129
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-04@taiwan-calendar
+DTSTART;VALUE=DATE:20271204
+DTEND;VALUE=DATE:20271205
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-05@taiwan-calendar
+DTSTART;VALUE=DATE:20271205
+DTEND;VALUE=DATE:20271206
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-11@taiwan-calendar
+DTSTART;VALUE=DATE:20271211
+DTEND;VALUE=DATE:20271212
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-12@taiwan-calendar
+DTSTART;VALUE=DATE:20271212
+DTEND;VALUE=DATE:20271213
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-18@taiwan-calendar
+DTSTART;VALUE=DATE:20271218
+DTEND;VALUE=DATE:20271219
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-19@taiwan-calendar
+DTSTART;VALUE=DATE:20271219
+DTEND;VALUE=DATE:20271220
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-24@taiwan-calendar
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20271225
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-25@taiwan-calendar
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:🇹🇼 行憲紀念日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-26@taiwan-calendar
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+SUMMARY:🇹🇼 台灣政府放假日
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
+END:VEVENT
+BEGIN:VEVENT
+UID:official-2027-12-31@taiwan-calendar
+DTSTART;VALUE=DATE:20271231
+DTEND;VALUE=DATE:20280101
+SUMMARY:🇹🇼 補假
+DESCRIPTION:資料來源：行政院人事行政總處\n中華民國政府行政機關辦公日曆表\n資料年度：2027
 END:VEVENT
 END:VCALENDAR
