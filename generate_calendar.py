@@ -42,8 +42,32 @@ HEADERS = {
 }
 
 # ============================================================
-# 官方行政院人事行政總處 (DGPA) 核定假日備援清單
-# 當政府開放資料 API 或 CSV 抓取異常時，直接啟用確保 100% 正確
+# 官方行政院人事行政總處 (DGPA) 核定補假對應
+# ============================================================
+
+MAKEUP_HOLIDAY_MAP = {
+    2026: {
+        "2026-02-20": "小年夜(補假)",
+        "2026-02-27": "和平紀念日(補假)",
+        "2026-04-03": "兒童節(補假)",
+        "2026-04-06": "清明節(補假)",
+        "2026-10-09": "國慶日(補假)",
+        "2026-10-26": "臺灣光復暨金門古寧頭大捷紀念日(補假)",
+    },
+    2027: {
+        "2027-02-09": "初一(補假)",
+        "2027-02-10": "初二(補假)",
+        "2027-03-01": "和平紀念日(補假)",
+        "2027-04-06": "兒童節(補假)",
+        "2027-04-30": "勞動節(補假)",
+        "2027-10-11": "國慶日(補假)",
+        "2027-12-24": "行憲紀念日(補假)",
+        "2027-12-31": "開國紀念日(補假)",
+    },
+}
+
+# ============================================================
+# 官方核定節日標準備援清單 (Fallback)
 # ============================================================
 
 OFFICIAL_HOLIDAYS_FALLBACK = {
@@ -185,21 +209,35 @@ def fetch_dgpa_events_for_year(year):
         return None
 
     year_events = []
+    makeup_map = MAKEUP_HOLIDAY_MAP.get(year, {})
+
     for r in rows:
         d = parse_date(r.get(date_col))
         if not d or d.year != year:
             continue
         is_hol = str(r.get(hol_col, "")).strip() in ("2", "２", "True", "true", "放假")
-        note = str(r.get(note_col, "")).strip().replace("放假", "").strip() if note_col else ""
-        if is_hol and note and note != "補假":
-            year_events.append({
-                "date": d,
-                "summary": note,
-                "category": "政府假日",
-                "description": f"{year}年政府行政機關辦公日曆表",
-            })
+        if not is_hol:
+            continue
 
-    return year_events if len(year_events) >= 5 else None
+        raw_note = str(r.get(note_col, "")).strip().replace("放假", "").strip() if note_col else ""
+        d_str = d.isoformat()
+
+        # 優先比對補假表
+        if d_str in makeup_map:
+            name = makeup_map[d_str]
+        elif raw_note and raw_note != "補假":
+            name = raw_note
+        else:
+            continue
+
+        year_events.append({
+            "date": d,
+            "summary": name,
+            "category": "政府假日",
+            "description": f"{year}年政府行政機關辦公日曆表",
+        })
+
+    return year_events if len(year_events) >= 10 else None
 
 
 def build_government_events():
@@ -208,7 +246,6 @@ def build_government_events():
         print(f"📅 處理 {year} 年政府辦公日曆...")
         parsed = fetch_dgpa_events_for_year(year)
 
-        # 若抓取成功且筆數足夠則使用，若失敗或解析不全則自動採用精確核定清單
         if parsed:
             print(f"✅ 從官方 CSV 成功取得 {year} 年日曆 ({len(parsed)} 筆)")
             events.extend(parsed)
