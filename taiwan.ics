@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Taiwan Life Calendar//GitHub//ZH-TW
+PRODID://Taiwan Life Calendar//GitHub//ZH-TW
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:🇹🇼 台灣生活行事曆
