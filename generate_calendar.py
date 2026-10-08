@@ -17,7 +17,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CALENDAR_NAME = "台灣生活行事曆"
 
-TARGET_YEARS = [2026, 2027]
+# 自動鎖定今年與明年（例如 2026 會抓 2026, 2027；到了 2027 會自動抓 2027, 2028）
+CURRENT_YEAR = datetime.now().year
+TARGET_YEARS = [CURRENT_YEAR, CURRENT_YEAR + 1]
 
 DGPA_DATASET_URL = "https://data.gov.tw/dataset/14718"
 
@@ -42,116 +44,47 @@ HEADERS = {
 }
 
 # ============================================================
-# 習慣名稱轉換器
+# 通用固定國定假日（供補假自動反推使用）
 # ============================================================
 
-def format_custom_summary(name):
-    if not name:
-        return ""
-    text = str(name).strip()
+FIXED_HOLIDAYS_MAP = {
+    (1, 1): "元旦",
+    (2, 28): "和平紀念日",
+    (4, 4): "兒童節",
+    (4, 5): "清明節",
+    (5, 1): "勞動節",
+    (9, 28): "教師節/孔子誕辰紀念日",
+    (10, 10): "國慶日",
+    (10, 25): "臺灣光復暨金門古寧頭大捷紀念日",
+    (12, 25): "聖誕節/行憲紀念日",
+}
 
-    # 1. 開國紀念日 -> 元旦
+# ============================================================
+# 名稱習慣規範轉換
+# ============================================================
+
+def format_custom_summary(text):
+    if not text:
+        return ""
+    text = str(text).strip()
+
     if "開國紀念日" in text:
         text = text.replace("開國紀念日", "元旦")
 
-    # 2. 教師節順序調整
     if "孔子誕辰紀念日/教師節" in text:
         text = text.replace("孔子誕辰紀念日/教師節", "教師節/孔子誕辰紀念日")
     elif "孔子誕辰紀念日" in text and "教師節" not in text:
         text = "教師節/孔子誕辰紀念日"
 
-    # 3. 行憲紀念日 -> 聖誕節/行憲紀念日
     if "行憲紀念日" in text and "聖誕節" not in text:
         text = text.replace("行憲紀念日", "聖誕節/行憲紀念日")
 
-    # 4. 春節特定補假標準化
-    if text == "初一(補假)":
-        text = "初四(補假初一)"
-    elif text == "初二(補假)":
-        text = "初五(補假初二)"
-
     return text
 
-# ============================================================
-# 官方行政院人事行政總處 (DGPA) 核定補假對應
-# ============================================================
-
-MAKEUP_HOLIDAY_MAP = {
-    2026: {
-        "2026-02-20": "小年夜(補假)",
-        "2026-02-27": "和平紀念日(補假)",
-        "2026-04-03": "兒童節(補假)",
-        "2026-04-06": "清明節(補假)",
-        "2026-10-09": "國慶日(補假)",
-        "2026-10-26": "臺灣光復暨金門古寧頭大捷紀念日(補假)",
-    },
-    2027: {
-        "2027-02-09": "初四(補假初一)",
-        "2027-02-10": "初五(補假初二)",
-        "2027-03-01": "和平紀念日(補假)",
-        "2027-04-06": "兒童節(補假)",
-        "2027-04-30": "勞動節(補假)",
-        "2027-10-11": "國慶日(補假)",
-        "2027-12-24": "聖誕節/行憲紀念日(補假)",
-        "2027-12-31": "元旦(補假)",
-    },
-}
 
 # ============================================================
-# 官方核定節日標準清單 (Fallback)
+# HTTP 請求模組
 # ============================================================
-
-OFFICIAL_HOLIDAYS_FALLBACK = {
-    2026: {
-        date(2026, 1, 1): "元旦",
-        date(2026, 2, 15): "小年夜",
-        date(2026, 2, 16): "除夕",
-        date(2026, 2, 17): "初一",
-        date(2026, 2, 18): "初二",
-        date(2026, 2, 19): "初三",
-        date(2026, 2, 20): "小年夜(補假)",
-        date(2026, 2, 27): "和平紀念日(補假)",
-        date(2026, 2, 28): "和平紀念日",
-        date(2026, 4, 3): "兒童節(補假)",
-        date(2026, 4, 4): "兒童節",
-        date(2026, 4, 5): "清明節",
-        date(2026, 4, 6): "清明節(補假)",
-        date(2026, 5, 1): "勞動節",
-        date(2026, 6, 19): "端午節",
-        date(2026, 9, 25): "中秋節",
-        date(2026, 9, 28): "教師節/孔子誕辰紀念日",
-        date(2026, 10, 9): "國慶日(補假)",
-        date(2026, 10, 10): "國慶日",
-        date(2026, 10, 25): "臺灣光復暨金門古寧頭大捷紀念日",
-        date(2026, 10, 26): "臺灣光復暨金門古寧頭大捷紀念日(補假)",
-        date(2026, 12, 25): "聖誕節/行憲紀念日",
-    },
-    2027: {
-        date(2027, 1, 1): "元旦",
-        date(2027, 2, 5): "小年夜",
-        date(2027, 2, 6): "除夕",
-        date(2027, 2, 7): "初一",
-        date(2027, 2, 8): "初二",
-        date(2027, 2, 9): "初四(補假初一)",
-        date(2027, 2, 10): "初五(補假初二)",
-        date(2027, 2, 28): "和平紀念日",
-        date(2027, 3, 1): "和平紀念日(補假)",
-        date(2027, 4, 4): "兒童節",
-        date(2027, 4, 5): "清明節",
-        date(2027, 4, 6): "兒童節(補假)",
-        date(2027, 4, 30): "勞動節(補假)",
-        date(2027, 5, 1): "勞動節",
-        date(2027, 6, 9): "端午節",
-        date(2027, 9, 15): "中秋節",
-        date(2027, 9, 28): "教師節/孔子誕辰紀念日",
-        date(2027, 10, 10): "國慶日",
-        date(2027, 10, 11): "國慶日(補假)",
-        date(2027, 10, 25): "臺灣光復暨金門古寧頭大捷紀念日",
-        date(2027, 12, 24): "聖誕節/行憲紀念日(補假)",
-        date(2027, 12, 25): "聖誕節/行憲紀念日",
-        date(2027, 12, 31): "元旦(補假)",
-    },
-}
 
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -202,7 +135,11 @@ def parse_date(value):
     return None
 
 
-def fetch_dgpa_events_for_year(year):
+# ============================================================
+# 政府 CSV 下載與解析
+# ============================================================
+
+def fetch_dgpa_csv_rows(year):
     roc = roc_year(year)
     resp = http_get(DGPA_DATASET_URL, timeout=20)
     if not resp:
@@ -225,68 +162,121 @@ def fetch_dgpa_events_for_year(year):
     text = decode_csv_content(csv_resp.content).lstrip("\ufeff")
     try:
         reader = csv.DictReader(io.StringIO(text))
-        rows = list(reader)
+        return list(reader)
     except Exception:
         return None
 
+
+# ============================================================
+# 通用連假推算演算法（春節序號化、補假來源自動反推）
+# ============================================================
+
+def process_year_holidays(rows, year):
     if not rows:
-        return None
+        return []
 
     date_col = next((c for c in rows[0].keys() if any(k in c for k in ["西元", "日期", "date"])), None)
     hol_col = next((c for c in rows[0].keys() if any(k in c for k in ["放假", "isHoliday"])), None)
     note_col = next((c for c in rows[0].keys() if any(k in c for k in ["備註", "節日", "名稱"])), None)
 
     if not date_col or not hol_col:
-        return None
+        return []
 
-    year_events = []
-    makeup_map = MAKEUP_HOLIDAY_MAP.get(year, {})
-
+    # 1. 整理全年度基本資料
+    calendar_map = {}
     for r in rows:
         d = parse_date(r.get(date_col))
         if not d or d.year != year:
             continue
         is_hol = str(r.get(hol_col, "")).strip() in ("2", "２", "True", "true", "放假")
-        if not is_hol:
+        note = str(r.get(note_col, "")).strip().replace("放假", "").strip() if note_col else ""
+        calendar_map[d] = {"is_holiday": is_hol, "note": note}
+
+    events = []
+    sorted_dates = sorted(calendar_map.keys())
+
+    # 2. 自動識別春節區間並依序編號
+    # 邏輯：從除夕當天開始，隨後的連續假期依序命名為 初一、初二、初三、初四(補假初一)、初五(補假初二)
+    chuxi_date = None
+    for d in sorted_dates:
+        if d.month in (1, 2) and calendar_map[d]["note"] == "除夕":
+            chuxi_date = d
+            break
+
+    cny_names = {}
+    if chuxi_date:
+        order_names = ["初一", "初二", "初三", "初四(補假初一)", "初五(補假初二)", "初六(補假)"]
+        curr_d = chuxi_date + timedelta(days=1)
+        idx = 0
+        while curr_d in calendar_map and calendar_map[curr_d]["is_holiday"] and idx < len(order_names):
+            cny_names[curr_d] = order_names[idx]
+            curr_d += timedelta(days=1)
+            idx += 1
+
+    # 3. 逐日產生事件，自動推導孤立的「補假」
+    for d in sorted_dates:
+        info = calendar_map[d]
+        if not info["is_holiday"]:
             continue
 
-        raw_note = str(r.get(note_col, "")).strip().replace("放假", "").strip() if note_col else ""
-        d_str = d.isoformat()
+        raw_note = info["note"]
+        final_summary = ""
 
-        if d_str in makeup_map:
-            name = makeup_map[d_str]
-        elif raw_note and raw_note != "補假":
-            name = format_custom_summary(raw_note)
-        else:
-            continue
+        # 春節動態名稱優先
+        if d in cny_names:
+            final_summary = cny_names[d]
+        elif raw_note == "除夕":
+            final_summary = "除夕"
+        elif raw_note == "小年夜":
+            final_summary = "小年夜"
+        elif raw_note == "補假":
+            # 動態往前尋找是哪個落在週末的節日補放假
+            # 例如 10/11 補假，往前比對 10/10 落在週六/週日
+            for delta in range(1, 5):
+                prev_d = d - timedelta(days=delta)
+                # 檢查前幾天是否為週末固定假日
+                if (prev_d.month, prev_d.day) in FIXED_HOLIDAYS_MAP and prev_d.weekday() in (5, 6):
+                    target_name = FIXED_HOLIDAYS_MAP[(prev_d.month, prev_d.day)]
+                    final_summary = f"{target_name}(補假)"
+                    break
+                # 檢查前幾天是否有小年夜/除夕遇週末
+                if prev_d in calendar_map and calendar_map[prev_d]["note"] in ("小年夜", "除夕") and prev_d.weekday() in (5, 6):
+                    final_summary = f"{calendar_map[prev_d]['note']}(補假)"
+                    break
+            if not final_summary:
+                final_summary = "補假"
+        elif raw_note:
+            final_summary = format_custom_summary(raw_note)
 
-        year_events.append({
-            "date": d,
-            "summary": name,
-            "category": "政府假日",
-            "description": f"{year}年政府行政機關辦公日曆表",
-        })
+        # 非一般單純週休二日，且有產生明確名稱才收錄
+        if final_summary and final_summary != "補假":
+            events.append({
+                "date": d,
+                "summary": final_summary,
+                "category": "政府假日",
+                "description": f"{year}年政府行政機關辦公日曆表",
+            })
 
-    return year_events if len(year_events) >= 10 else None
+    return events
 
 
 def build_government_events():
     events = []
     for year in TARGET_YEARS:
-        parsed = fetch_dgpa_events_for_year(year)
-        if parsed:
+        print(f"📅 自動下載與解析 {year} 年政府辦公日曆...")
+        rows = fetch_dgpa_csv_rows(year)
+        if rows:
+            parsed = process_year_holidays(rows, year)
+            print(f"✅ 成功自適應取得 {year} 年日曆共 {len(parsed)} 筆事件")
             events.extend(parsed)
         else:
-            fallback = OFFICIAL_HOLIDAYS_FALLBACK.get(year, {})
-            for d, name in fallback.items():
-                events.append({
-                    "date": d,
-                    "summary": name,
-                    "category": "政府假日",
-                    "description": f"{year}年政府行政機關辦公日曆表",
-                })
+            print(f"⚠️ 無法取得 {year} 年 DGPA 資料（可能政府尚未公告該年度資料）")
     return events
 
+
+# ============================================================
+# 母親節 / 父親節（每年全自動通用計算）
+# ============================================================
 
 def get_second_sunday_of_may(year):
     d = date(year, 5, 1)
@@ -311,6 +301,10 @@ def build_family_events():
         })
     return events
 
+
+# ============================================================
+# 高雄停班停課
+# ============================================================
 
 def get_kaohsiung_events():
     events = []
@@ -345,6 +339,10 @@ def get_kaohsiung_events():
         pass
     return events
 
+
+# ============================================================
+# ICS 格式輸出
+# ============================================================
 
 def ics_escape(val):
     if not val:
@@ -402,7 +400,7 @@ def build_ics(events):
 def main():
     all_events = build_government_events() + build_family_events() + get_kaohsiung_events()
 
-    # 嚴格去重
+    # 全域嚴格去重
     unique_events = []
     seen = set()
     for e in all_events:
