@@ -17,6 +17,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CALENDAR_NAME = "台灣生活行事曆"
 
+# 從 2026 年起算，每年自動往後涵蓋
 START_YEAR = 2026
 CURRENT_YEAR = max(datetime.now().year, START_YEAR)
 TARGET_YEARS = sorted(list(set(range(START_YEAR, CURRENT_YEAR + 2))))
@@ -58,14 +59,18 @@ FIXED_HOLIDAYS_MAP = {
     (12, 25): "聖誕節/行憲紀念日",
 }
 
-# 清明節精確回歸公式 (4/4 或 4/5)
+# 清明節精確回歸公式
 def get_qingming_date(year):
     y = year % 100
     day = int((y * 0.2422 + 4.81) - int((y - 1) / 4))
     return date(year, 4, day)
 
-# 2026/2027 官方核定備援表（確保若 DGPA 開放資料連線異常或找不到該年 CSV 時 100% 準確）
-FALLBACK_HOLIDAYS = {
+# ============================================================
+# 官方核定節日標準底冊 (2026 / 2027 精準保底)
+# 保證即使政府 API / CSV 抓取格式變動，2026 及 2027 也 100% 完整無缺
+# ============================================================
+
+BASE_HOLIDAYS = {
     2026: {
         date(2026, 1, 1): "元旦",
         date(2026, 2, 15): "小年夜",
@@ -92,10 +97,11 @@ FALLBACK_HOLIDAYS = {
     },
     2027: {
         date(2027, 1, 1): "元旦",
-        date(2027, 2, 5): "小年夜",
-        date(2027, 2, 6): "除夕",
-        date(2027, 2, 7): "初一",
-        date(2027, 2, 8): "初二",
+        date(2027, 2, 4): "小年夜",
+        date(2027, 2, 5): "除夕",
+        date(2027, 2, 6): "初一",
+        date(2027, 2, 7): "初二",
+        date(2027, 2, 8): "初三",
         date(2027, 2, 9): "初四(補假初一)",
         date(2027, 2, 10): "初五(補假初二)",
         date(2027, 2, 28): "和平紀念日",
@@ -118,7 +124,7 @@ FALLBACK_HOLIDAYS = {
 }
 
 # ============================================================
-# 名稱習慣規範轉換
+# 自訂習慣名稱替換
 # ============================================================
 
 def format_custom_summary(text):
@@ -140,7 +146,7 @@ def format_custom_summary(text):
     return text
 
 # ============================================================
-# HTTP 請求模組
+# HTTP 連線與日期解析
 # ============================================================
 
 SESSION = requests.Session()
@@ -150,9 +156,9 @@ SESSION.headers.update(HEADERS)
 def http_get(url, timeout=30):
     for attempt in range(3):
         try:
-            response = SESSION.get(url, timeout=timeout, verify=False)
-            response.raise_for_status()
-            return response
+            resp = SESSION.get(url, timeout=timeout, verify=False)
+            resp.raise_for_status()
+            return resp
         except Exception:
             if attempt < 2:
                 continue
@@ -192,7 +198,7 @@ def parse_date(value):
     return None
 
 # ============================================================
-# 精準配對該年度 DGPA CSV
+# 爬取 DGPA CSV
 # ============================================================
 
 def fetch_dgpa_csv_rows(year):
@@ -204,9 +210,11 @@ def fetch_dgpa_csv_rows(year):
     page = html.unescape(resp.text)
     urls = re.findall(r'https?://www\.dgpa\.gov\.tw/FileConversion\?[^"\']+', page)
 
-    # 必須精準包含「民國年」或「西元年」，不可抓混
-    target_patterns = [f"{roc}%E5%B9%B4", f"{roc}年", f"_{roc}_", f"/{roc}/", f"{year}"]
     matched_url = None
+    target_patterns = [
+        f"{roc}%E5%B9%B4", f"{roc}年", f"_{roc}_", f"/{roc}/", f"{roc}",
+        f"{year}%E5%B9%B4", f"{year}年", f"{year}"
+    ]
 
     for u in urls:
         decoded = unquote(u)
@@ -232,7 +240,7 @@ def fetch_dgpa_csv_rows(year):
         return None
 
 # ============================================================
-# 動態節日與補假推算
+# 通用連假推導演算法
 # ============================================================
 
 def process_year_holidays(rows, year):
@@ -258,7 +266,7 @@ def process_year_holidays(rows, year):
     events = []
     sorted_dates = sorted(calendar_map.keys())
 
-    # 1. 抓取除夕起點，動態給予初一至初五名稱
+    # 1. 自動定位除夕，為初一至初五編號
     chuxi_date = None
     for d in sorted_dates:
         if d.month in (1, 2) and "除夕" in calendar_map[d]["note"]:
@@ -286,7 +294,6 @@ def process_year_holidays(rows, year):
         raw_note = info["note"]
         final_summary = ""
 
-        # 春節專屬名稱
         if d in cny_names:
             final_summary = cny_names[d]
         elif "除夕" in raw_note:
@@ -294,7 +301,7 @@ def process_year_holidays(rows, year):
         elif "小年夜" in raw_note:
             final_summary = "小年夜"
         elif "補假" in raw_note:
-            # 雙向尋找（前 1~4 天，或後 1~2 天如週五提早補週六假）
+            # 雙向尋找補假來源（往前 1~4 天，或往後 1~2 天如週五提前補週六）
             candidate_deltas = [-1, -2, -3, -4, 1, 2]
             for delta in candidate_deltas:
                 target_d = d + timedelta(days=delta)
@@ -333,24 +340,26 @@ def process_year_holidays(rows, year):
 def build_government_events():
     events = []
     for year in TARGET_YEARS:
-        print(f"📅 處理 {year} 年政府辦公日曆...")
-        rows = fetch_dgpa_csv_rows(year)
-        parsed = process_year_holidays(rows, year) if rows else []
-
-        # 驗證筆數：若爬蟲成功且事件完整（>=12筆），使用動態爬蟲結果；否則無縫啟用精確核定表
-        if len(parsed) >= 12:
-            print(f"✅ 從 DGPA 開放資料成功解析 {year} 年日曆 ({len(parsed)} 筆事件)")
-            events.extend(parsed)
-        else:
-            print(f"ℹ️ 啟用 {year} 年標準核定節日清單（確保 2026/2027 完整性）")
-            fallback = FALLBACK_HOLIDAYS.get(year, {})
-            for d, name in fallback.items():
+        # 若有內建核定表（2026、2027），直接使用最標準的底冊，保證完整
+        if year in BASE_HOLIDAYS:
+            print(f"📌 套用 {year} 年官方核定假日標準清單（保證 100% 完整）")
+            for d, name in BASE_HOLIDAYS[year].items():
                 events.append({
                     "date": d,
                     "summary": name,
                     "category": "政府假日",
                     "description": f"{year}年政府行政機關辦公日曆表",
                 })
+        else:
+            # 未來年份（2028 起）自動走 DGPA 開放資料爬蟲與通用連假演算法
+            print(f"📅 自動下載與解析 {year} 年政府辦公日曆...")
+            rows = fetch_dgpa_csv_rows(year)
+            parsed = process_year_holidays(rows, year) if rows else []
+            if parsed:
+                print(f"✅ 成功自適應取得 {year} 年日曆 ({len(parsed)} 筆事件)")
+                events.extend(parsed)
+            else:
+                print(f"⚠️ 尚未取得 {year} 年資料")
     return events
 
 
